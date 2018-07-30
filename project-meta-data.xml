@@ -1,0 +1,11 @@
+<project-meta-data xmlns="http://tail-f.com/ns/ncs-project">
+  <name>sol-test</name>
+  <project-version>1.0</project-version>
+  <description>Skeleton for a NCS project</description>
+
+  <package>
+    <name>sol6</name>
+    <local/>
+  </package>
+
+</project-meta-data>
