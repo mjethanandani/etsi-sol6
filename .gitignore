@@ -1,3 +1,7 @@
 .build-meta
 setup.mk* 
 storedstate
+/logs
+/ncs-cdb
+load-dir/
+/state
