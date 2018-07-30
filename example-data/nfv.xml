@@ -11,8 +11,8 @@
         <id>firewall</id>
         <name>Firewall VDU</name>
         <int-cpd>
-          <id>outside</id>
-          <ext-cpd>outside</ext-cpd>
+          <id>inside</id>
+          <ext-cpd>inside</ext-cpd>
           <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
         </int-cpd>
         <int-cpd>
@@ -21,8 +21,8 @@
           <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
         </int-cpd>
         <int-cpd>
-          <id>inside</id>
-          <ext-cpd>inside</ext-cpd>
+          <id>outside</id>
+          <ext-cpd>outside</ext-cpd>
           <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
         </int-cpd>
         <virtual-compute-desc>asa-vcd</virtual-compute-desc>
@@ -51,7 +51,7 @@
         <image>http://www.cisco.com/asa.qcow2</image>
       </sw-image-desc>
       <ext-cpd>
-        <id>outside</id>
+        <id>inside</id>
         <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
       </ext-cpd>
       <ext-cpd>
@@ -59,7 +59,7 @@
         <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
       </ext-cpd>
       <ext-cpd>
-        <id>inside</id>
+        <id>outside</id>
         <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
       </ext-cpd>
       <deployment-flavor>
@@ -172,5 +172,206 @@
         <default-instantiation-level>single</default-instantiation-level>
       </deployment-flavor>
     </vnfd>
+    <nsd>
+      <id>service-chain-1</id>
+      <vnfd>
+        <vnfd>ASA</vnfd>
+      </vnfd>
+      <vnfd>
+        <vnfd>CSR</vnfd>
+      </vnfd>
+      <service-access-point-descriptor>
+        <id>inside</id>
+      </service-access-point-descriptor>
+      <service-access-point-descriptor>
+        <id>management</id>
+      </service-access-point-descriptor>
+      <service-access-point-descriptor>
+        <id>outside</id>
+      </service-access-point-descriptor>
+      <virtual-link-desc>
+        <id>fw2dpi</id>
+        <version>1.0</version>
+        <connectivity-type>
+          <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        </connectivity-type>
+        <deployment-flavor>
+          <id>normal</id>
+          <qos>
+            <latency>0</latency>
+            <packet-delay-variation>0</packet-delay-variation>
+          </qos>
+        </deployment-flavor>
+      </virtual-link-desc>
+      <virtual-link-desc>
+        <id>r2fw</id>
+        <version>1.0</version>
+        <connectivity-type>
+          <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        </connectivity-type>
+        <deployment-flavor>
+          <id>normal</id>
+          <qos>
+            <latency>0</latency>
+            <packet-delay-variation>0</packet-delay-variation>
+          </qos>
+        </deployment-flavor>
+      </virtual-link-desc>
+      <deployment-flavor>
+        <id>fw-router</id>
+        <vnf-profile>
+          <id>firewall</id>
+          <vnfd>ASA</vnfd>
+          <flavor>normal</flavor>
+          <instantiation-level>single</instantiation-level>
+          <min-number-of-instances>1</min-number-of-instances>
+          <max-number-of-instances>1</max-number-of-instances>
+          <virtual-link-connectivity>
+            <virtual-link-profile>r2fw</virtual-link-profile>
+            <cp>outside</cp>
+          </virtual-link-connectivity>
+          <sapd-connectivity>
+            <sapd>inside</sapd>
+            <cp>inside</cp>
+          </sapd-connectivity>
+          <sapd-connectivity>
+            <sapd>management</sapd>
+            <cp>management</cp>
+          </sapd-connectivity>
+        </vnf-profile>
+        <vnf-profile>
+          <id>router</id>
+          <vnfd>CSR</vnfd>
+          <flavor>normal</flavor>
+          <instantiation-level>single</instantiation-level>
+          <min-number-of-instances>1</min-number-of-instances>
+          <max-number-of-instances>1</max-number-of-instances>
+          <virtual-link-connectivity>
+            <virtual-link-profile>r2fw</virtual-link-profile>
+            <cp>right</cp>
+          </virtual-link-connectivity>
+          <sapd-connectivity>
+            <sapd>management</sapd>
+            <cp>management</cp>
+          </sapd-connectivity>
+          <sapd-connectivity>
+            <sapd>outside</sapd>
+            <cp>left</cp>
+          </sapd-connectivity>
+        </vnf-profile>
+        <virtual-link-profile>
+          <virtual-link-desc>r2fw</virtual-link-desc>
+          <flavor>normal</flavor>
+          <max-bitrate-requirements>
+            <root>10000000</root>
+          </max-bitrate-requirements>
+          <min-bitrate-requirements>
+            <root>0</root>
+          </min-bitrate-requirements>
+        </virtual-link-profile>
+        <instantiation-level>
+          <id>normal</id>
+          <description>Single FW and Router</description>
+          <vnf-to-level-mapping>
+            <vnf-profile>firewall</vnf-profile>
+            <number-of-instances>1</number-of-instances>
+          </vnf-to-level-mapping>
+          <vnf-to-level-mapping>
+            <vnf-profile>router</vnf-profile>
+            <number-of-instances>1</number-of-instances>
+          </vnf-to-level-mapping>
+        </instantiation-level>
+      </deployment-flavor>
+      <deployment-flavor>
+        <id>fw-router-dpi</id>
+        <vnf-profile>
+          <id>firewall</id>
+          <vnfd>ASA</vnfd>
+          <flavor>normal</flavor>
+          <instantiation-level>single</instantiation-level>
+          <min-number-of-instances>1</min-number-of-instances>
+          <max-number-of-instances>1</max-number-of-instances>
+          <virtual-link-connectivity>
+            <virtual-link-profile>fw2dpi</virtual-link-profile>
+            <cp>inside</cp>
+          </virtual-link-connectivity>
+          <virtual-link-connectivity>
+            <virtual-link-profile>r2fw</virtual-link-profile>
+            <cp>outside</cp>
+          </virtual-link-connectivity>
+          <sapd-connectivity>
+            <sapd>management</sapd>
+            <cp>management</cp>
+          </sapd-connectivity>
+        </vnf-profile>
+        <vnf-profile>
+          <id>router</id>
+          <vnfd>CSR</vnfd>
+          <flavor>normal</flavor>
+          <instantiation-level>single</instantiation-level>
+          <min-number-of-instances>1</min-number-of-instances>
+          <max-number-of-instances>1</max-number-of-instances>
+          <virtual-link-connectivity>
+            <virtual-link-profile>r2fw</virtual-link-profile>
+            <cp>right</cp>
+          </virtual-link-connectivity>
+          <sapd-connectivity>
+            <sapd>management</sapd>
+            <cp>management</cp>
+          </sapd-connectivity>
+          <sapd-connectivity>
+            <sapd>outside</sapd>
+            <cp>left</cp>
+          </sapd-connectivity>
+        </vnf-profile>
+        <pnf-profile>
+          <pnfd>physical-dpi</pnfd>
+          <virtual-link-connectivity>
+            <virtual-link-profile>fw2dpi</virtual-link-profile>
+            <cp>outside</cp>
+          </virtual-link-connectivity>
+        </pnf-profile>
+        <virtual-link-profile>
+          <virtual-link-desc>fw2dpi</virtual-link-desc>
+          <flavor>normal</flavor>
+          <max-bitrate-requirements>
+            <root>1000000</root>
+          </max-bitrate-requirements>
+          <min-bitrate-requirements>
+            <root>0</root>
+          </min-bitrate-requirements>
+        </virtual-link-profile>
+        <virtual-link-profile>
+          <virtual-link-desc>r2fw</virtual-link-desc>
+          <flavor>normal</flavor>
+          <max-bitrate-requirements>
+            <root>1000000</root>
+          </max-bitrate-requirements>
+          <min-bitrate-requirements>
+            <root>0</root>
+          </min-bitrate-requirements>
+        </virtual-link-profile>
+        <instantiation-level>
+          <id>normal</id>
+          <description>Router+FW+Physical DPI</description>
+          <vnf-to-level-mapping>
+            <vnf-profile>firewall</vnf-profile>
+            <number-of-instances>1</number-of-instances>
+          </vnf-to-level-mapping>
+          <vnf-to-level-mapping>
+            <vnf-profile>router</vnf-profile>
+            <number-of-instances>1</number-of-instances>
+          </vnf-to-level-mapping>
+        </instantiation-level>
+      </deployment-flavor>
+    </nsd>
+    <pnfd>
+      <id>physical-dpi</id>
+      <version>1.0</version>
+      <ext-cpd>
+        <id>outside</id>
+        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      </ext-cpd>
+    </pnfd>
   </nfv>
 </config>
