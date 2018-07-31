@@ -1,6 +1,7 @@
 # Build
-ncs-project update -v -y
+```ncs-project update -v -y
 make all start
+```
 
 # Load example data
 ```
