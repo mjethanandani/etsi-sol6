@@ -1290,7 +1290,7 @@ submodule etsi-nfv-vnf {
         uses cpd;
       }
 
-      list deployment-flavor {
+      list df {
         must "nfv:default-instantiation-level or " +
              "count(nfv:instantiation-level) = 1";
         key "id";
@@ -1500,10 +1500,10 @@ submodule etsi-nfv-vnf {
             }
             leaf number-of-instances {
               type uint16;
-              must ". <= ../../../../nfv:deployment-flavor/" +
+              must ". <= ../../../../nfv:df/" +
                    "nfv:vdu-profile[id=current()/../nfv:id]/" +
                    "nfv:max-number-of-instances";
-              must ". >= ../../../../nfv:deployment-flavor/" +
+              must ". >= ../../../../nfv:df/" +
                    "nfv:vdu-profile[id=current()/../nfv:id]/" +
                    "nfv:min-number-of-instances";
               mandatory true;
