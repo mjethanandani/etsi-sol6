@@ -2,7 +2,6 @@ module etsi-nfv {
   namespace "urn:etsi:params:xml:ns:yang:etsi-nfv";
   prefix nfv;
 
-
   import etsi-nfv-common {
     prefix common;
   }
