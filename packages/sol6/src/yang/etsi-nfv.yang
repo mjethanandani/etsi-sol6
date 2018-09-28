@@ -26,5 +26,5 @@ module etsi-nfv {
     uses vnfd;
     uses nsd;
     uses pnfd;
-  } // nfv
+  } 
 }

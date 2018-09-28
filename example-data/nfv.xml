@@ -174,21 +174,17 @@
     </vnfd>
     <nsd>
       <id>service-chain-1</id>
-      <vnfd>
-        <vnfd>ASA</vnfd>
-      </vnfd>
-      <vnfd>
-        <vnfd>CSR</vnfd>
-      </vnfd>
-      <service-access-point-descriptor>
+      <vnfd-id>ASA</vnfd-id>
+      <vnfd-id>CSR</vnfd-id>
+      <sapd>
         <id>inside</id>
-      </service-access-point-descriptor>
-      <service-access-point-descriptor>
+      </sapd>
+      <sapd>
         <id>management</id>
-      </service-access-point-descriptor>
-      <service-access-point-descriptor>
+      </sapd>
+      <sapd>
         <id>outside</id>
-      </service-access-point-descriptor>
+      </sapd>
       <virtual-link-desc>
         <id>fw2dpi</id>
         <version>1.0</version>
@@ -217,51 +213,52 @@
           </qos>
         </deployment-flavor>
       </virtual-link-desc>
-      <deployment-flavor>
+      <df>
         <id>fw-router</id>
         <vnf-profile>
           <id>firewall</id>
-          <vnfd>ASA</vnfd>
-          <flavor>normal</flavor>
+          <vnfd-id>ASA</vnfd-id>
+          <flavor-id>normal</flavor-id>
           <instantiation-level>single</instantiation-level>
           <min-number-of-instances>1</min-number-of-instances>
           <max-number-of-instances>1</max-number-of-instances>
           <virtual-link-connectivity>
-            <virtual-link-profile>r2fw</virtual-link-profile>
-            <cp>outside</cp>
+            <virtual-link-profile-id>r2fw</virtual-link-profile-id>
+            <cpd-id>outside</cpd-id>
           </virtual-link-connectivity>
-          <sapd-connectivity>
-            <sapd>inside</sapd>
-            <cp>inside</cp>
-          </sapd-connectivity>
-          <sapd-connectivity>
-            <sapd>management</sapd>
-            <cp>management</cp>
-          </sapd-connectivity>
+          <!-- <sapd-connectivity> -->
+          <!--   <sapd>inside</sapd> -->
+          <!--   <cp>inside</cp> -->
+          <!-- </sapd-connectivity> -->
+          <!-- <sapd-connectivity> -->
+          <!--   <sapd>management</sapd> -->
+          <!--   <cp>management</cp> -->
+          <!-- </sapd-connectivity> -->
         </vnf-profile>
         <vnf-profile>
           <id>router</id>
-          <vnfd>CSR</vnfd>
-          <flavor>normal</flavor>
+          <vnfd-id>CSR</vnfd-id>
+          <flavor-id>normal</flavor-id>
           <instantiation-level>single</instantiation-level>
           <min-number-of-instances>1</min-number-of-instances>
           <max-number-of-instances>1</max-number-of-instances>
           <virtual-link-connectivity>
-            <virtual-link-profile>r2fw</virtual-link-profile>
-            <cp>right</cp>
+            <virtual-link-profile-id>r2fw</virtual-link-profile-id>
+            <cpd-id>right</cpd-id>
           </virtual-link-connectivity>
-          <sapd-connectivity>
-            <sapd>management</sapd>
-            <cp>management</cp>
-          </sapd-connectivity>
-          <sapd-connectivity>
-            <sapd>outside</sapd>
-            <cp>left</cp>
-          </sapd-connectivity>
+          <!-- <sapd-connectivity> -->
+          <!--   <sapd>management</sapd> -->
+          <!--   <cp>management</cp> -->
+          <!-- </sapd-connectivity> -->
+          <!-- <sapd-connectivity> -->
+          <!--   <sapd>outside</sapd> -->
+          <!--   <cp>left</cp> -->
+          <!-- </sapd-connectivity> -->
         </vnf-profile>
         <virtual-link-profile>
-          <virtual-link-desc>r2fw</virtual-link-desc>
-          <flavor>normal</flavor>
+          <id>r2fw</id>
+          <virtual-link-desc-id>r2fw</virtual-link-desc-id>
+          <flavor-id>normal</flavor-id>
           <max-bitrate-requirements>
             <root>10000000</root>
           </max-bitrate-requirements>
@@ -269,7 +266,7 @@
             <root>0</root>
           </min-bitrate-requirements>
         </virtual-link-profile>
-        <instantiation-level>
+        <ns-level>
           <id>normal</id>
           <description>Single FW and Router</description>
           <vnf-to-level-mapping>
@@ -280,8 +277,8 @@
             <vnf-profile>router</vnf-profile>
             <number-of-instances>1</number-of-instances>
           </vnf-to-level-mapping>
-        </instantiation-level>
-      </deployment-flavor>
+        </ns-level>
+      </df>
       <deployment-flavor>
         <id>fw-router-dpi</id>
         <vnf-profile>

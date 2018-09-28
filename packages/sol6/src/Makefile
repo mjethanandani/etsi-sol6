@@ -22,7 +22,7 @@ $(DIRS):
 	mkdir -p $@
 
 ../load-dir/%.fxs: yang/%.yang
-	$(NCSC) $(NCSCPATH) -c -o $@ $<
+	$(NCSC) $(NCSCPATH) -c  --fail-on-warnings -o $@ $<
 clean:
 	rm -rf $(DIRS)
 .PHONY: clean
