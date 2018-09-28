@@ -39,6 +39,7 @@ submodule etsi-nfv-pnf {
 
     list pnfd {
       key "id";
+
       leaf id {
         type string;
         description

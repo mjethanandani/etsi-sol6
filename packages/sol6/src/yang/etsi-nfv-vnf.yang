@@ -101,6 +101,161 @@ submodule etsi-nfv-vnf {
     }
   }
 
+  // This grouping definition is for use within Vnfd as defined in
+  // IFA011. A similar definition of Cpd exists in IFA014, but
+  // that is for use with Sapd and Pnfd. Do not use this grouping
+  // for that.
+  grouping cpd {
+    description
+      "A Cpd information element describes network
+       connectivity to a compute resource or a VL.";
+    reference
+      "GS NFC IFA011: Section 7.1.6.3 Cpd Information
+       Element";
+    leaf id {
+      type string;
+      description
+	"Identifier of this Cpd information element.";
+      reference
+	"GS NFV IFA011: Section 7.1.6.3, Cpd information element.";
+    }
+    leaf layer-protocol {
+      mandatory true;
+      type identityref {
+	base common:layer-protocol;
+      }
+      description
+	"Identifies which protocol the CP uses for connectivity
+         purposes (Ethernet, MPLS, ODU2, IPV4, IPV6, Pseudo-Wire,
+         etc.).";
+      reference
+	"GS NFV IFA011: Section 7.1.6.3, Cpd information element.";
+    }
+    leaf role {
+      type identityref {
+	base common:cp-role;
+      }
+      description
+	"Identifies the role of the port in the context of the
+         traffic flow patterns in the VNF or parent NS. For example a
+         VNF with a tree flow pattern within the VNF will have legal
+         cpRoles of ROOT and LEAF.";
+      reference
+	"GS NFV IFA011: Section 7.1.6.3, Cpd information element.";
+    }
+    leaf description {
+      type string;
+      description
+	"Human readable description of the connection point";
+      reference
+	"GS NFV IFA011: Section 7.1.6.3, Cpd information element.";
+    }
+    container protocol {
+      description
+	"Identifies the protocol layering information the CP uses for
+         connectivity purposes and associated information. There shall
+         be one cpProtocol for each layer protocol as indicated by the
+         attribute layerProtocol.";
+      reference
+	"GS NFV IFA011: Section 7.1.6.3, Cpd information element.";
+      leaf associated-layer-protocol {
+	type identityref {
+	  base common:layer-protocol;
+	}
+	description
+	  "One of the values of the attribute layerProtocol of the Cpd
+           IE.";
+	reference
+	  "GS NFV IFA011: Section 7.1.6.8, CpProtocolData information
+           element.";
+      }
+
+      list address-data {
+	key "address-type";
+	leaf address-type {
+	  type identityref {
+	    base common:address-type;
+	  }
+	  description
+	    "Describes the type of the address to be assigned to the CP
+             instantiated from the parent CPD.
+             Value:
+             • MAC address.
+             • IP address.
+             • …
+             The content type shall be aligned with the address type
+             supported by the layerProtocol attribute of the parent CPD.";
+	  reference
+	    "GS NFV IFA011: Section 7.1.3.3, AddressData information
+             element.";
+	}
+	container l2-address-data {
+	  when "../address-type='mac-address'";
+	}
+	container l3-address-data {
+	  when "../address-type='ip-address'";
+	  leaf ip-address-assignment {
+	    type boolean;
+	    description
+	      "Specify if the address assignment is the responsibility
+               of management and orchestration function or not. If it
+               is set to True, it is the management and orchestration
+               function responsibility. ";
+	    reference
+	      "GS NFV IFA011: Section 7.1.3.4, L3AddressData
+               information element.";
+	  }
+	  leaf floating-ip-activated {
+	    type boolean;
+	    description
+	      "Specify if the floating IP scheme is activated on the CP
+               or not.";
+	    reference
+	      "GS NFV IFA011: Section 7.1.3.4, L3AddressData
+               information element.";
+	  }
+	  leaf ip-address-type {
+	    type enumeration {
+	      enum "ipv4";
+	      enum "ipv6";
+	    }
+	    description
+	      "Define address type. The address type should be aligned
+               with the address type supported by the layerProtocol
+               attribute of the parent VnfExtCpd.";
+	    reference
+	      "GS NFV IFA011: Section 7.1.3.4, L3AddressData
+               information element.";
+	  }
+	  leaf number-of-ip-addresses {
+	    type uint32;
+	    description
+	      "Minimum number of IP addresses to be assigned based on
+               this L3AddressData information element.";
+	    reference
+	      "GS NFV IFA011: Section 7.1.3.4, L3AddressData
+               information element.";
+	  }
+	}
+	description
+	  "The AddressData information element supports providing
+           information about the addressing scheme and parameters
+           applicable to a CP.";
+	reference
+	  "GS NFV IFA011: Section 7.1.3.3, AddressData information
+           element.";
+      }
+    }
+    leaf trunk-mode {
+      type boolean;
+      description
+	"Information about whether the CP instantiated from this CPD
+         is in Trunk mode (802.1Q or other).";
+      reference
+	"GS NFV IFA011: Section 7.1.6.3, Cpd information element.";
+    }
+  }
+	  
   grouping vnfd {
     list vnfd {
       key "id";
@@ -241,6 +396,7 @@ submodule etsi-nfv-vnf {
              an external connection point.";
           reference
             "GS NFV IFA011: Section 7.1.6.2, Vdu information element";
+
           choice cp-connection {
             mandatory true;
             description
@@ -294,18 +450,19 @@ submodule etsi-nfv-vnf {
               "GS NFV IFA011: Section 7.1.6.4, VduCpd information
                element.";
           }
-          uses common:cpd;
+
+          uses cpd;
         }
         leaf virtual-compute-desc {
           type leafref {
             path "../../nfv:virtual-compute-descriptor/" +
                  "nfv:id";
           }
-
-          must "../../nfv:virtual-compute-descriptor[id=current()]/nfv:virtual-memory/size >=" +
-            "../../nfv:sw-image-desc[id=current()/../sw-image-desc]/min-ram" {
+          must "../../nfv:virtual-compute-descriptor[id=current()]/" +
+               "nfv:virtual-memory/size >=" +
+               "../../nfv:sw-image-desc[id=current()/" +
+               "../sw-image-desc]/min-ram" {
           }
-
           description
             "Describes CPU, Memory and acceleration requirements of
              the Virtualisation Container realizing this VDU.";
@@ -320,7 +477,6 @@ submodule etsi-nfv-vnf {
             path "../../nfv:virtual-storage-descriptor/" +
                  "nfv:id";
           }
-
           description
             "Describes storage requirements for a VirtualStorage
              instance attached to the virtualisation container
@@ -329,9 +485,7 @@ submodule etsi-nfv-vnf {
             "GS NFV IFA011: Section 7.1.6.2, VDU information
              element, and Section 7.1.9.4, Information elements
              related to Virtual Storage.";
-
         }
-
         list boot-order {
           ordered-by user;
           key "key";
@@ -776,7 +930,6 @@ submodule etsi-nfv-vnf {
           must "../nfv:size-of-storage >=" +
             "../../nfv:sw-image-desc[id=current()]/min-disk" {
           }
-
           description
             "Software image to be loaded on the VirtualStorage
              resource created based on this VirtualStorageDesc.";
@@ -938,12 +1091,12 @@ submodule etsi-nfv-vnf {
              information element.";
         }
         leaf min-ram {
-          default 0;
           type decimal64 {
             fraction-digits 1;
             range "0..max";
           }
           units "Gb";
+          default 0;
           description
             "The minimal RAM requirement for this software image.
              The value of the 'size' attribute of
@@ -1094,7 +1247,7 @@ submodule etsi-nfv-vnf {
             "GS NFV IFA011: Section 7.1.7.2, VnfVirtualLinkDesc
              information element.";
         }
-        list monitoring-parameter {
+        list monitoring-parameters {
           key "id";
           leaf id {
             type string;
@@ -1134,7 +1287,7 @@ submodule etsi-nfv-vnf {
           ext-CP to the VDU's CP.
         */
         uses virtual-network-interface-requirements;
-        uses common:cpd;
+        uses cpd;
       }
 
       list deployment-flavor {
