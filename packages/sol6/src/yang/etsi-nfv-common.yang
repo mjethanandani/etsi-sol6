@@ -1,5 +1,6 @@
 module etsi-nfv-common {
   namespace "urn:etsi:params:xml:ns:yang:etsi-nfv-common";
+  yang-version 1.1;
   prefix common;
 
   description
