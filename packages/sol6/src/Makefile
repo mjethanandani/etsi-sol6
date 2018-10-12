@@ -22,6 +22,7 @@ $(DIRS):
 	mkdir -p $@
 
 ../load-dir/%.fxs: yang/%.yang
+	# $(NCSC) $(NCSCPATH) -c --fail-on-warnings --strict-yang `ls yang/$*-ann.yang  > /dev/null 2>&1 && echo "-a yang/$*-ann.yang"` -o $@ $<
 	$(NCSC) $(NCSCPATH) -c -o $@ $<
 clean:
 	rm -rf $(DIRS)

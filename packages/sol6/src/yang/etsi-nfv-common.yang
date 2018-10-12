@@ -1,5 +1,6 @@
 module etsi-nfv-common {
   namespace "urn:etsi:params:xml:ns:yang:etsi-nfv-common";
+  yang-version 1.1;
   prefix common;
 
   description
@@ -369,206 +370,6 @@ module etsi-nfv-common {
     }
   }
 
-  grouping ns-virtual-link-connectivity {
-    leaf virtual-link-profile-id {
-      type leafref {
-        path "../../../virtual-link-profile/id";
-      }
-      description
-        "Reference an NS VL profile.";
-      reference
-        "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
-         information element.";
-    }
-
-    list global-cpd-id {
-      key "id";
-
-      leaf id {
-	type string;
-      }
-      
-      choice profile-id {
-	leaf vnf-profile-id {
-	  type leafref {
-	    path "../../id";
-	  }
-	}
-	leaf pnf-profile-id {
-	  type leafref {
-	    path "../../id";
-	  }
-	}
-	leaf ns-profile-id {
-	  type leafref {
-	    path "../../id";
-	  }
-	}
-      }
-
-      choice cpd-id {
-	leaf vnf-ext-cpd-id {
-	  type leafref {
-	    path "deref(../../vnfd-id)/../ext-cpd/id";
-	  }
-	}
-	leaf pnf-ext-cpd-id {
-	  type leafref {
-	    path "deref(../../pnfd-id)/../ext-cpd/id";
-	  }
-	}
-	leaf sapd-cpd-id {
-	  type leafref {
-	    path "deref(../../../nsd-id)/../ext-cpd/id";
-	  }
-	}
-      }
-    }
-  }
-
-  grouping ns-level {
-    list ns-level {
-      min-elements 1;
-      key "id";
-
-      description
-        "Describes the details of an NS level.";
-      reference
-        "GS NFV IFA014: Section 6.3.2.2 NsDf information element
-         GS NFV IFA014: Section 6.7.2.2 NsScaling information
-         element";
-            
-      leaf id {
-        type string;
-        description
-          "Identifier of this NsLevel information element. It
-           uniquely identifies an NS level within the DF.";
-        reference
-          "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-           element";
-      }
-
-      leaf description {
-        type string;
-        description
-          "Human readable description of the NS level.";
-        reference
-          "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-           element";
-      }
-
-      list vnf-to-level-mapping {
-        key "vnf-profile-id";
-
-        description
-          "Specifies the profile of the VNFs involved in this NS
-           level and, for each of them, the required number of
-           instances.";
-        reference
-          "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-           element";
-
-        leaf vnf-profile-id {
-          type leafref {
-            path "../../../vnf-profile/id";
-          }
-          description
-            "Identifies the profile to be used for a VNF
-             involved in an NS level.";
-          reference
-            "GS NFV IFA014: Section 6.7.4.2 VnfToLevelMapping
-             information element";
-        }
-
-        leaf number-of-instances {
-          mandatory true;
-          type uint32;
-          description
-            "Specifies the number of VNF instances required for
-             an NS level.";
-          reference
-            "GS NFV IFA014: Section 6.7.4.2 VnfToLevelMapping
-             information element";
-        }
-      }
-
-      list virtual-link-to-level-mapping {
-        key "virtual-link-profile-id";
-
-        description
-          "Specifies the profile of the VLs involved in this NS
-           level and, for each of them, the needed bandwidth.";
-        reference
-          "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-           element";
-
-        leaf virtual-link-profile-id {
-          type leafref {
-            path "../../../virtual-link-profile/id";
-          }
-          description
-            "Identifies the profile to be used for a VL involved
-             in an NS level.";
-          reference
-            "GS NFV IFA014: Section 6.7.5.2
-             VirtualLinkToLevelMapping information element";
-        }
-
-        uses common:link-bitrate-requirements;
-      }
-
-      list ns-to-level-mapping {
-        key "ns-profile-id";
-
-        description
-          "Specifies the profile of the nested NSs involved in
-           this NS level and, for each of them, the required
-           number of instances.";
-        reference
-          "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-           element";
-
-        leaf ns-profile-id {
-          type leafref {
-            path "../../../ns-profile/id";
-          }
-          description
-            "Identifies the profile to be used for a nested NS
-             involved in the NS level.";
-          reference
-            "GS NFV IFA014: Section 6.7.6.2 NsToLevel information
-             element";
-        }
-
-        leaf number-of-instances {
-          mandatory true;
-          type uint32;
-          description
-            "Specifies the number of nested NS instances required
-             for the NS scale level.";
-          reference
-            "GS NFV IFA014: Section 6.7.6.2 NsToLevel information
-             element";
-        }
-      }
-
-      must "(count(vnf-to-level-mapping) + " +
-        "count(virtual-link-to-level-mapping) + " +
-        "count(ns-to-level-mapping)) > 0" {
-        error-message "At least one attribute between " +
-          "vnf-to-level-mapping, " +
-          "virtual-link-to-level-mapping and " +
-          "ns-to-level-mapping shall be present.";
-        description
-          "At least one attribute between vnfToLevelMapping,
-           vlirtualLinkToLevelMapping and nsToLevelMapping shall
-           be present.";
-        reference
-          "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-           element";
-      }
-    }
-  }
 
   // The following grouping is Cpd information element as defined in
   // IFA014. IFA011 defines its own Cpd information element, which
@@ -577,66 +378,66 @@ module etsi-nfv-common {
   grouping cpd {
     description
       "The Cpd information element specifies the characteristics of
-       connection points attached to NFs and NSs. This is an
-       abstract class used as parent for the various Cpd classes.
-       It has an attribute 'trunkMode' which enables the NFVO to
-       identify whether the Cp instantiated from the Cpd is in trunk
-       mode or not.";
+      connection points attached to NFs and NSs. This is an
+      abstract class used as parent for the various Cpd classes.
+      It has an attribute 'trunkMode' which enables the NFVO to
+      identify whether the Cp instantiated from the Cpd is in trunk
+      mode or not.";
     reference
       "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
-    
+
     leaf id {
       type string;
       description
-	"Identifier of this Cpd information element.";
+        "Identifier of this Cpd information element.";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
     leaf layer-protocol {
       mandatory true;
       type identityref {
-	base common:layer-protocol;
+        base common:layer-protocol;
       }
       description
         "Identifies a protocol that the connection points
-         corresponding to the CPD support for connectivity purposes
-         (e.g. Ethernet, MPLS, ODU2, IPV4, IPV6, Pseudo-Wire, etc.).";
+        corresponding to the CPD support for connectivity purposes
+        (e.g. Ethernet, MPLS, ODU2, IPV4, IPV6, Pseudo-Wire, etc.).";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
     leaf role {
       type identityref {
-	base common:cp-role;
+        base common:cp-role;
       }
       description
-	"Identifies the role of the connection points
-         corresponding to the CPD in the context of the traffic
-         flow patterns in the VNF, PNF or NS. For example an NS with
-         a tree flow pattern within the NS will have legal cpRoles
-         of ROOT and LEAF.";
+        "Identifies the role of the connection points
+        corresponding to the CPD in the context of the traffic
+        flow patterns in the VNF, PNF or NS. For example an NS with
+        a tree flow pattern within the NS will have legal cpRoles
+        of ROOT and LEAF.";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
     leaf description {
       type string;
       description
-	"Provides human-readable information on the purpose of the
-         connection point (e.g. connection point for control plane
-         traffic).";
+        "Provides human-readable information on the purpose of the
+        connection point (e.g. connection point for control plane
+            traffic).";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
     leaf trunk-mode {
       type boolean;
       description
-	"Information about whether the Cp instantiated from this CPD
-         is in Trunk mode (802.1Q or other). When operating in
-         'trunk mode', the Cp is capable of carrying traffic for
-         several VLANs. A cardinality of 0 implies that trunkMode
-         is not configured for the Cp i.e. It is equivalent to
-         Boolean value 'false'.";
+        "Information about whether the Cp instantiated from this CPD
+        is in Trunk mode (802.1Q or other). When operating in
+        'trunk mode', the Cp is capable of carrying traffic for
+        several VLANs. A cardinality of 0 implies that trunkMode
+        is not configured for the Cp i.e. It is equivalent to
+        Boolean value 'false'.";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
   }
 }
