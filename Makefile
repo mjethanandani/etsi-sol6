@@ -60,3 +60,7 @@ glog:
 	     git --no-pager log -n "$(N)";); \
 	    echo ""; \
 	  done
+
+container-test:
+	docker build -t etsi-test .
+	docker run --rm -it etsi-test
