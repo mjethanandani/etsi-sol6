@@ -1,0 +1,479 @@
+{
+  "data": {
+    "etsi-nfv:nfv": {
+      "vnfd": [
+        {
+          "id": "ASA",
+          "provider": "Cisco",
+          "product-name": "Cisco ASAv",
+          "software-version": "9.8",
+          "version": "9.8 ",
+          "vnfm-info": ["ESC"],
+          "vdu": [
+            {
+              "id": "firewall",
+              "name": "Firewall VDU",
+              "int-cpd": [
+                {
+                  "id": "inside",
+                  "ext-cpd": "inside",
+                  "layer-protocol": "etsi-nfv-common:Ethernet"
+                },
+                {
+                  "id": "management",
+                  "ext-cpd": "management",
+                  "layer-protocol": "etsi-nfv-common:Ethernet"
+                },
+                {
+                  "id": "outside",
+                  "ext-cpd": "outside",
+                  "layer-protocol": "etsi-nfv-common:Ethernet"
+                }
+              ],
+              "virtual-compute-desc": "asa-vcd",
+              "virtual-storage-desc": ["asa-vsd"],
+              "sw-image-desc": "asa-image"
+            }
+          ],
+          "virtual-compute-descriptor": [
+            {
+              "id": "asa-vcd",
+              "virtual-memory": {
+                "size": "4.0"
+              },
+              "virtual-cpu": {
+                "num-virtual-cpu": 2
+              }
+            }
+          ],
+          "virtual-storage-descriptor": [
+            {
+              "id": "asa-vsd",
+              "type-of-storage": "root",
+              "size-of-storage": "0"
+            }
+          ],
+          "sw-image-desc": [
+            {
+              "id": "asa-image",
+              "container-format": "bare",
+              "disk-format": "qcow2",
+              "min-ram": "2.0",
+              "image": "http://www.cisco.com/asa.qcow2"
+            }
+          ],
+          "ext-cpd": [
+            {
+              "id": "inside",
+              "layer-protocol": "etsi-nfv-common:Ethernet"
+            },
+            {
+              "id": "management",
+              "layer-protocol": "etsi-nfv-common:Ethernet"
+            },
+            {
+              "id": "outside",
+              "layer-protocol": "etsi-nfv-common:Ethernet"
+            }
+          ],
+          "deployment-flavor": [
+            {
+              "id": "normal",
+              "vdu-profile": [
+                {
+                  "id": "firewall",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 2
+                }
+              ],
+              "instantiation-level": [
+                {
+                  "id": "double",
+                  "vdu-level": [
+                    {
+                      "id": "firewall",
+                      "number-of-instances": 2
+                    }
+                  ]
+                },
+                {
+                  "id": "single",
+                  "vdu-level": [
+                    {
+                      "id": "firewall",
+                      "number-of-instances": 1
+                    }
+                  ]
+                }
+              ],
+              "default-instantiation-level": "single"
+            }
+          ]
+        },
+        {
+          "id": "CSR",
+          "provider": "Cisco",
+          "product-name": "Cisco CSR 1000v",
+          "software-version": "3.16",
+          "version": "3.16",
+          "vnfm-info": ["ESC"],
+          "vdu": [
+            {
+              "id": "router",
+              "name": "Router VDU",
+              "int-cpd": [
+                {
+                  "id": "left",
+                  "ext-cpd": "left",
+                  "layer-protocol": "etsi-nfv-common:Ethernet"
+                },
+                {
+                  "id": "management",
+                  "ext-cpd": "management",
+                  "layer-protocol": "etsi-nfv-common:Ethernet"
+                },
+                {
+                  "id": "right",
+                  "ext-cpd": "right",
+                  "layer-protocol": "etsi-nfv-common:Ethernet"
+                }
+              ],
+              "virtual-compute-desc": "csr-vcd",
+              "virtual-storage-desc": ["csr-vsd"],
+              "sw-image-desc": "csr-image"
+            }
+          ],
+          "virtual-compute-descriptor": [
+            {
+              "id": "csr-vcd",
+              "virtual-memory": {
+                "size": "4.0"
+              },
+              "virtual-cpu": {
+                "num-virtual-cpu": 2
+              }
+            }
+          ],
+          "virtual-storage-descriptor": [
+            {
+              "id": "csr-vsd",
+              "type-of-storage": "root",
+              "size-of-storage": "0"
+            }
+          ],
+          "sw-image-desc": [
+            {
+              "id": "csr-image",
+              "container-format": "bare",
+              "disk-format": "qcow2",
+              "min-ram": "2.0",
+              "image": "http://www.cisco.com/csr.qcow2"
+            }
+          ],
+          "ext-cpd": [
+            {
+              "id": "left",
+              "layer-protocol": "etsi-nfv-common:Ethernet"
+            },
+            {
+              "id": "management",
+              "layer-protocol": "etsi-nfv-common:Ethernet"
+            },
+            {
+              "id": "right",
+              "layer-protocol": "etsi-nfv-common:Ethernet"
+            }
+          ],
+          "deployment-flavor": [
+            {
+              "id": "normal",
+              "vdu-profile": [
+                {
+                  "id": "router",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 2
+                }
+              ],
+              "instantiation-level": [
+                {
+                  "id": "double",
+                  "vdu-level": [
+                    {
+                      "id": "router",
+                      "number-of-instances": 2
+                    }
+                  ]
+                },
+                {
+                  "id": "single",
+                  "vdu-level": [
+                    {
+                      "id": "router",
+                      "number-of-instances": 1
+                    }
+                  ]
+                }
+              ],
+              "default-instantiation-level": "single"
+            }
+          ]
+        }
+      ],
+      "nsd": [
+        {
+          "id": "service-chain-1",
+          "vnfd": [
+            {
+              "vnfd": "ASA"
+            },
+            {
+              "vnfd": "CSR"
+            }
+          ],
+          "service-access-point-descriptor": [
+            {
+              "id": "inside"
+            },
+            {
+              "id": "management"
+            },
+            {
+              "id": "outside"
+            }
+          ],
+          "virtual-link-desc": [
+            {
+              "id": "fw2dpi",
+              "version": "1.0",
+              "connectivity-type": {
+                "layer-protocol": "etsi-nfv-common:Ethernet"
+              },
+              "deployment-flavor": [
+                {
+                  "id": "normal",
+                  "qos": {
+                    "latency": 0,
+                    "packet-delay-variation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "id": "r2fw",
+              "version": "1.0",
+              "connectivity-type": {
+                "layer-protocol": "etsi-nfv-common:Ethernet"
+              },
+              "deployment-flavor": [
+                {
+                  "id": "normal",
+                  "qos": {
+                    "latency": 0,
+                    "packet-delay-variation": 0
+                  }
+                }
+              ]
+            }
+          ],
+          "deployment-flavor": [
+            {
+              "id": "fw-router",
+              "vnf-profile": [
+                {
+                  "id": "firewall",
+                  "vnfd": "ASA",
+                  "flavor": "normal",
+                  "instantiation-level": "single",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "virtual-link-connectivity": [
+                    {
+                      "virtual-link-profile": "r2fw",
+                      "cp": "outside"
+                    }
+                  ],
+                  "sapd-connectivity": [
+                    {
+                      "sapd": "inside",
+                      "cp": "inside"
+                    },
+                    {
+                      "sapd": "management",
+                      "cp": "management"
+                    }
+                  ]
+                },
+                {
+                  "id": "router",
+                  "vnfd": "CSR",
+                  "flavor": "normal",
+                  "instantiation-level": "single",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "virtual-link-connectivity": [
+                    {
+                      "virtual-link-profile": "r2fw",
+                      "cp": "right"
+                    }
+                  ],
+                  "sapd-connectivity": [
+                    {
+                      "sapd": "management",
+                      "cp": "management"
+                    },
+                    {
+                      "sapd": "outside",
+                      "cp": "left"
+                    }
+                  ]
+                }
+              ],
+              "virtual-link-profile": [
+                {
+                  "virtual-link-desc": "r2fw",
+                  "flavor": "normal",
+                  "max-bitrate-requirements": {
+                    "root": "10000000"
+                  },
+                  "min-bitrate-requirements": {
+                    "root": "0"
+                  }
+                }
+              ],
+              "instantiation-level": [
+                {
+                  "id": "normal",
+                  "description": "Single FW and Router",
+                  "vnf-to-level-mapping": [
+                    {
+                      "vnf-profile": "firewall",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "vnf-profile": "router",
+                      "number-of-instances": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "fw-router-dpi",
+              "vnf-profile": [
+                {
+                  "id": "firewall",
+                  "vnfd": "ASA",
+                  "flavor": "normal",
+                  "instantiation-level": "single",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "virtual-link-connectivity": [
+                    {
+                      "virtual-link-profile": "fw2dpi",
+                      "cp": "inside"
+                    },
+                    {
+                      "virtual-link-profile": "r2fw",
+                      "cp": "outside"
+                    }
+                  ],
+                  "sapd-connectivity": [
+                    {
+                      "sapd": "management",
+                      "cp": "management"
+                    }
+                  ]
+                },
+                {
+                  "id": "router",
+                  "vnfd": "CSR",
+                  "flavor": "normal",
+                  "instantiation-level": "single",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "virtual-link-connectivity": [
+                    {
+                      "virtual-link-profile": "r2fw",
+                      "cp": "right"
+                    }
+                  ],
+                  "sapd-connectivity": [
+                    {
+                      "sapd": "management",
+                      "cp": "management"
+                    },
+                    {
+                      "sapd": "outside",
+                      "cp": "left"
+                    }
+                  ]
+                }
+              ],
+              "pnf-profile": [
+                {
+                  "pnfd": "physical-dpi",
+                  "virtual-link-connectivity": [
+                    {
+                      "virtual-link-profile": "fw2dpi",
+                      "cp": "outside"
+                    }
+                  ]
+                }
+              ],
+              "virtual-link-profile": [
+                {
+                  "virtual-link-desc": "fw2dpi",
+                  "flavor": "normal",
+                  "max-bitrate-requirements": {
+                    "root": "1000000"
+                  },
+                  "min-bitrate-requirements": {
+                    "root": "0"
+                  }
+                },
+                {
+                  "virtual-link-desc": "r2fw",
+                  "flavor": "normal",
+                  "max-bitrate-requirements": {
+                    "root": "1000000"
+                  },
+                  "min-bitrate-requirements": {
+                    "root": "0"
+                  }
+                }
+              ],
+              "instantiation-level": [
+                {
+                  "id": "normal",
+                  "description": "Router+FW+Physical DPI",
+                  "vnf-to-level-mapping": [
+                    {
+                      "vnf-profile": "firewall",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "vnf-profile": "router",
+                      "number-of-instances": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "pnfd": [
+        {
+          "id": "physical-dpi",
+          "version": "1.0",
+          "ext-cpd": [
+            {
+              "id": "outside",
+              "layer-protocol": "etsi-nfv-common:Ethernet"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

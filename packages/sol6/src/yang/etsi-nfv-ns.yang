@@ -14,8 +14,8 @@ submodule etsi-nfv-ns {
   revision 2017-01-20 {
     description
       "Initial revision
-      Common data structure to support NSD according to:
-      ETSI GS NFV-IFA 011 Ed251v243";
+       Common data structure to support NSD according to:
+       ETSI GS NFV-IFA 011 Ed251v243";
 
     reference
       "ETSI GS NFV-IFA 011 Ed251v243";
@@ -874,7 +874,7 @@ submodule etsi-nfv-ns {
               "References a PNFD.";
             reference
               "GS NFV IFA014: Section 6.3.6.2 PnfProfile information
-              element";
+               element";
           }
 
           list virtual-link-connectivity {
@@ -1038,7 +1038,7 @@ submodule etsi-nfv-ns {
 
           leaf scaling-level {
             type leafref {
-              path "../../ns-level/id";
+              path "../../ns-instantiation-level/id";
             }
             description
               "Describes the details of an NS level.";
@@ -1238,7 +1238,7 @@ submodule etsi-nfv-ns {
 
         leaf default-instantiation-level {
           type leafref {
-            path "../ns-level/id";
+            path "../ns-instantiation-level/id";
           }
           description
             "Identifies the NS level which represents the default NS
@@ -1301,7 +1301,7 @@ submodule etsi-nfv-ns {
           leaf instantiation-level-id {
             mandatory true;
             type leafref {
-              path "deref(../ns-df-id)/../ns-level/id";
+              path "deref(../ns-df-id)/../ns-instantiation-level/id";
             }
             description
               "Identifies the NS level within the referenced NS DF to
