@@ -626,31 +626,6 @@ submodule etsi-nfv-ns {
         }
       }
 
-      list monitored-info {
-        key "id";
-        leaf id {
-          type string;
-        }
-
-        choice source {
-          // We have no way of refererencing a VNF MP today
-          container ns-monitoring-parameter {
-            uses common:monitoring-parameter;
-          }
-          container vnf-indicator {
-            leaf vnfd {
-              type leafref {
-                path "/nfv/vnfd/id";
-              }
-            }
-            leaf indicator {
-              type leafref {
-                path "deref(../vnfd)/../indicator/id";
-              }
-            }
-          }
-        }
-      }
       leaf-list autoscale-rule {
         type string;
       }
@@ -693,7 +668,7 @@ submodule etsi-nfv-ns {
 
         leaf flavor-key {
           type leafref {
-            path "../../monitored-info/id";
+            path "../monitored-info/id";
           }
           description
             "Assurance parameter against which this flavour is being
@@ -1435,6 +1410,79 @@ submodule etsi-nfv-ns {
                information element";
           }
         }
+
+	list monitored-info {
+	  key "id";
+
+	  leaf id {
+	    type string;
+	  }
+
+	  container vnf-indicator-info {
+	    leaf vnfd-id {
+	      type leafref {
+		path "/nfv/vnfd/id";
+	      }
+	      description
+		"Identifies a VNFD.";
+	      reference
+		"GS NFV IFA014: Section 6.2.7.2 VnfIndicatorData
+                 information element";
+	    }
+	    leaf vnf-indicator {
+	      mandatory true;
+	      type leafref {
+		path "deref(../vnfd-id)/../indicator/id";
+	      }
+	      description
+		"Identifies a VNF indicator within the VNFD.";
+	      reference
+		"GS NFV IFA014: Section 6.2.7.2 VnfIndicatorData
+                 information element";
+	    }
+	    description
+	      "Uniquely identifies this VNF Indicator information
+               element.";
+            reference
+              "GS NFV IFA014: Section 6.2.6.2 MonitoredData
+               information element";
+	  }
+
+	  // monitoringParameter in IFA014 is defined by MonitoredData
+	  // whereas monitoringParameter in IFA011 is defined by
+	  // MonitoringParameter.
+	  container monitoring-parameter {
+	    leaf id {
+	      type string;
+	      description
+		"Unique identifier of this monitoring parameter
+                 information element.";
+	      reference
+		"GS NFV IFA014: Section 6.2.8.2 MonitoringParameter
+                 information element";
+	    }
+
+	    leaf name {
+	      type string;
+	      description
+		"Human readable name of the monitoring parameter.";
+	      reference
+		"GS NFV IFA014: Section 6.2.8.2 MonitoringParameter
+                 information element";
+	    }
+
+	    leaf performance-metric {
+	      mandatory true;
+	      type string;
+	      description
+		"Defines the virtualised resource-related performance
+                 metric.";
+	      reference
+		"GS NFV IFA014: Section 6.2.8.2 MonitoringParameter
+                 information element";
+	    }
+	  }
+	}
       }
       uses common:security-parameters;
     }
