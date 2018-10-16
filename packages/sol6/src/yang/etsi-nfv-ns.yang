@@ -98,7 +98,6 @@ submodule etsi-nfv-ns {
         type leafref {
           path "../../vnfd/id";
         }
-        min-elements 1;
         description
           "References the VNFD of a constituent VNF.";
         reference
@@ -110,7 +109,6 @@ submodule etsi-nfv-ns {
 	type leafref {
 	  path "../../pnfd/id";
 	}
-        min-elements 1;
         description
           "References the PNFD of a constituent PNF.";
         reference
@@ -120,7 +118,6 @@ submodule etsi-nfv-ns {
 
       list sapd {
         key "id";
-        min-elements 1;
         description
           "Provides the descriptor of a service access point of the
            network service.";
@@ -642,7 +639,7 @@ submodule etsi-nfv-ns {
       list df {
         min-elements 1;
         must "default-instantiation-level or " +
-          "count(ns-level) = 1" {
+          "count(ns-instantiation-level) = 1" {
           error-message
             "default-instantiation-level must be present if there " +
             "multiple instantion-level";

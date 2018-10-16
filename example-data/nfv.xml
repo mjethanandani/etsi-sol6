@@ -194,13 +194,13 @@
           <min-number-of-instances>1</min-number-of-instances>
           <max-number-of-instances>1</max-number-of-instances>
         </vnf-profile>
-        <ns-level>
+        <ns-instantiation-level>
           <id>single</id>
           <vnf-to-level-mapping>
             <vnf-profile-id>firewall</vnf-profile-id>
             <number-of-instances>1</number-of-instances>
           </vnf-to-level-mapping>
-        </ns-level>
+        </ns-instantiation-level>
       </df>
     </nsd>
     <nsd>
@@ -320,7 +320,7 @@
             <root>0</root>
           </min-bitrate-requirements>
         </virtual-link-profile>
-        <ns-level>
+        <ns-instantiation-level>
           <id>normal</id>
           <description>Single FW and Router</description>
           <vnf-to-level-mapping>
@@ -331,7 +331,7 @@
             <vnf-profile-id>router</vnf-profile-id>
             <number-of-instances>1</number-of-instances>
           </vnf-to-level-mapping>
-        </ns-level>
+        </ns-instantiation-level>
       </df>
       <df>
         <id>fw-router-dpi</id>
@@ -412,7 +412,7 @@
             <root>0</root>
           </min-bitrate-requirements>
         </virtual-link-profile>
-        <ns-level>
+        <ns-instantiation-level>
           <id>normal</id>
           <description>Router+FW+Physical DPI</description>
           <vnf-to-level-mapping>
@@ -423,7 +423,7 @@
             <vnf-profile-id>router</vnf-profile-id>
             <number-of-instances>1</number-of-instances>
           </vnf-to-level-mapping>
-        </ns-level>
+        </ns-instantiation-level>
       </df>
     </nsd>
     <nsd>
@@ -483,7 +483,7 @@
             <root>0</root>
           </min-bitrate-requirements>
         </virtual-link-profile>
-        <ns-level>
+        <ns-instantiation-level>
           <id>normal</id>
           <vnf-to-level-mapping>
             <vnf-profile-id>router</vnf-profile-id>
@@ -493,7 +493,7 @@
             <virtual-link-profile-id>r2fw</virtual-link-profile-id>
             <root>10</root>
           </virtual-link-to-level-mapping>
-        </ns-level>
+        </ns-instantiation-level>
         <ns-profile>
           <id>firewall</id>
           <nsd-id>firewall-nsd</nsd-id>
