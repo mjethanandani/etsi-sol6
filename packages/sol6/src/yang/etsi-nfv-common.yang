@@ -370,7 +370,6 @@ module etsi-nfv-common {
     }
   }
 
-
   // The following grouping is Cpd information element as defined in
   // IFA014. IFA011 defines its own Cpd information element, which
   // is defined in etsi-nfv-vnf.yang file. Do not use this grouping
@@ -378,11 +377,11 @@ module etsi-nfv-common {
   grouping cpd {
     description
       "The Cpd information element specifies the characteristics of
-      connection points attached to NFs and NSs. This is an
-      abstract class used as parent for the various Cpd classes.
-      It has an attribute 'trunkMode' which enables the NFVO to
-      identify whether the Cp instantiated from the Cpd is in trunk
-      mode or not.";
+       connection points attached to NFs and NSs. This is an
+       abstract class used as parent for the various Cpd classes.
+       It has an attribute 'trunkMode' which enables the NFVO to
+       identify whether the Cp instantiated from the Cpd is in trunk
+       mode or not.";
     reference
       "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
 
@@ -400,8 +399,8 @@ module etsi-nfv-common {
       }
       description
         "Identifies a protocol that the connection points
-        corresponding to the CPD support for connectivity purposes
-        (e.g. Ethernet, MPLS, ODU2, IPV4, IPV6, Pseudo-Wire, etc.).";
+         corresponding to the CPD support for connectivity purposes
+         (e.g. Ethernet, MPLS, ODU2, IPV4, IPV6, Pseudo-Wire, etc.).";
       reference
         "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
@@ -411,10 +410,10 @@ module etsi-nfv-common {
       }
       description
         "Identifies the role of the connection points
-        corresponding to the CPD in the context of the traffic
-        flow patterns in the VNF, PNF or NS. For example an NS with
-        a tree flow pattern within the NS will have legal cpRoles
-        of ROOT and LEAF.";
+         corresponding to the CPD in the context of the traffic
+         flow patterns in the VNF, PNF or NS. For example an NS with
+         a tree flow pattern within the NS will have legal cpRoles
+         of ROOT and LEAF.";
       reference
         "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
@@ -422,8 +421,8 @@ module etsi-nfv-common {
       type string;
       description
         "Provides human-readable information on the purpose of the
-        connection point (e.g. connection point for control plane
-            traffic).";
+         connection point (e.g. connection point for control plane
+         traffic).";
       reference
         "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
@@ -431,11 +430,11 @@ module etsi-nfv-common {
       type boolean;
       description
         "Information about whether the Cp instantiated from this CPD
-        is in Trunk mode (802.1Q or other). When operating in
-        'trunk mode', the Cp is capable of carrying traffic for
-        several VLANs. A cardinality of 0 implies that trunkMode
-        is not configured for the Cp i.e. It is equivalent to
-        Boolean value 'false'.";
+         is in Trunk mode (802.1Q or other). When operating in
+         'trunk mode', the Cp is capable of carrying traffic for
+         several VLANs. A cardinality of 0 implies that trunkMode
+         is not configured for the Cp i.e. It is equivalent to
+         Boolean value 'false'.";
       reference
         "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }

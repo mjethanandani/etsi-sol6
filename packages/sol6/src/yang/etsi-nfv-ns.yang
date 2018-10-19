@@ -14,8 +14,8 @@ submodule etsi-nfv-ns {
   revision 2017-01-20 {
     description
       "Initial revision
-      Common data structure to support NSD according to:
-      ETSI GS NFV-IFA 011 Ed251v243";
+       Common data structure to support NSD according to:
+       ETSI GS NFV-IFA 011 Ed251v243";
 
     reference
       "ETSI GS NFV-IFA 011 Ed251v243";
@@ -42,10 +42,10 @@ submodule etsi-nfv-ns {
         type string;
         description
           "Identifier of this NSD information element. It Globally
-        uniquely identifies an instance of the NSD.";
+           uniquely identifies an instance of the NSD.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
       leaf designer {
         type string;
@@ -53,7 +53,7 @@ submodule etsi-nfv-ns {
           "Identifies the designer of the NSD.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
       leaf version {
         type string;
@@ -61,7 +61,7 @@ submodule etsi-nfv-ns {
           "Identifies the version of the NSD.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
       leaf name {
         type string;
@@ -69,17 +69,17 @@ submodule etsi-nfv-ns {
           "Provides the human readable name of the NSD.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
       leaf invariant-id {
         type string;
         description
           "Identifies an NSD in a version independent manner. This
-          attribute is invariant across versions of the network
-          service descriptor.";
+           attribute is invariant across versions of the network
+           service descriptor.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
 
       leaf-list nested-nsd-id {
@@ -91,7 +91,7 @@ submodule etsi-nfv-ns {
           "References the NSD of a constituent nested NS.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
 
       leaf-list vnfd-id {
@@ -102,31 +102,29 @@ submodule etsi-nfv-ns {
           "References the VNFD of a constituent VNF.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
 
       leaf-list pnfd-id {
-        type leafref {
-          path "../../pnfd/id";
-        }
+	type leafref {
+	  path "../../pnfd/id";
+	}
         description
           "References the PNFD of a constituent PNF.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
       }
 
       list sapd {
         key "id";
-        min-elements 1;
         description
           "Provides the descriptor of a service access point of the
-          network service.";
+           network service.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
 
-        // use the id defined in cpd.
         leaf id {
           type string;
           description
@@ -139,11 +137,11 @@ submodule etsi-nfv-ns {
           type boolean;
           description
             "Specify whether the SAP address assignment is under the
-            responsibility of management and orchestration functions
-            or not. If it is set to True, management and
-            orchestration functions are responsible for assigning
-            addresses to the access points instantiated from this
-            SAPD.";
+             responsibility of management and orchestration functions
+             or not. If it is set to True, management and
+             orchestration functions are responsible for assigning
+             addresses to the access points instantiated from this
+             SAPD.";
           reference
             "GS NFV IFA014: Section 6.2.3.2 Sapd information element";
         }
@@ -154,60 +152,60 @@ submodule etsi-nfv-ns {
           }
           description
             "References the descriptor of the NS VL instance to
-            which the SAP instantiated from this SAPD connects to.";
+             which the SAP instantiated from this SAPD connects to.";
           reference
             "GS NFV IFA014: Section 6.2.3.2 Sapd information element";
         }
 
         choice associated-cpd-id {
-            container vnf {
-              leaf vnfd-id {
-                mandatory true;
-                type leafref {
-                   path "/nfv:nfv/nfv:vnfd/nfv:id";
-                }
-                must "boolean(../../../vnfd-id[.=current()])";
+          container vnf {
+            leaf vnfd-id {
+              mandatory true;
+              type leafref {
+                path "/nfv:nfv/nfv:vnfd/nfv:id";
               }
+              must "boolean(../../../vnfd-id[.=current()])";
+            }
 
-              leaf ext-cpd-id {
-                mandatory true;
-                type leafref {
-                  path "deref(../vnfd-id)/../nfv:ext-cpd/nfv:id";
-                }
+            leaf ext-cpd-id {
+              mandatory true;
+              type leafref {
+                path "deref(../vnfd-id)/../nfv:ext-cpd/nfv:id";
               }
             }
-            container pnf {
-              leaf pnfd-id {
-                mandatory true;
+          }
+          container pnf {
+            leaf pnfd-id {
+              mandatory true;
                 type leafref {
-                   path "/nfv:nfv/nfv:pnfd/nfv:id";
-                }
-                must "boolean(../pnfd-id[.=current()])";
+                path "/nfv:nfv/nfv:pnfd/nfv:id";
               }
+              must "boolean(../pnfd-id[.=current()])";
+            }
 
-              leaf ext-cpd-id {
-                mandatory true;
-                type leafref {
-                  path "deref(../pnfd-id)/../nfv:ext-cpd/nfv:id";
-                }
+            leaf ext-cpd-id {
+              mandatory true;
+              type leafref {
+                path "deref(../pnfd-id)/../nfv:ext-cpd/nfv:id";
               }
             }
-            container ns {
-              leaf nsd-id {
-                mandatory true;
-                type leafref {
-                   path "/nfv:nfv/nfv:nsd/nfv:id";
-                }
-                must "boolean(../nsd-id[.=current()])";
+          }
+          container ns {
+            leaf nsd-id {
+            mandatory true;
+              type leafref {
+                path "/nfv:nfv/nfv:nsd/nfv:id";
               }
+              must "boolean(../nsd-id[.=current()])";
+	    }
 
-              leaf ext-cpd-id {
-                mandatory true;
-                type leafref {
-                  path "deref(../nsd-id)/../nfv:sapd/nfv:id";
-                }
+            leaf ext-cpd-id {
+              mandatory true;
+              type leafref {
+                path "deref(../nsd-id)/../nfv:sapd/nfv:id";
               }
             }
+          }
         }
       }
 
@@ -217,16 +215,15 @@ submodule etsi-nfv-ns {
           "Provides the constituent VLDs.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
-
+           information element";
         leaf id {
           type string;
           description
             "Identifier of the NsVirtualLinkDesc information element.
-            It uniquely identifies a VLD.";
+             It uniquely identifies a VLD.";
           reference
             "GS NFV IFA014: Section 6.5.2.2 NsVirtualLinkDesc
-            information element";
+             information element";
         }
 
         leaf provider {
@@ -235,7 +232,7 @@ submodule etsi-nfv-ns {
             "Defines the organization generating the VLD.";
           reference
             "GS NFV IFA014: Section 6.5.2.2 NsVirtualLinkDesc
-            information element";
+             information element";
         }
 
         leaf version {
@@ -245,7 +242,7 @@ submodule etsi-nfv-ns {
             "Specifies the version of the VLD.";
           reference
             "GS NFV IFA014: Section 6.5.2.2 NsVirtualLinkDesc
-            information element";
+             information element";
         }
 
         uses common:connectivity-type;
@@ -255,29 +252,29 @@ submodule etsi-nfv-ns {
 
           description
             "The VirtualLinkDf information element specifies
-            properties for instantiating a VL according to a
-            specific flavour.";
+             properties for instantiating a VL according to a
+             specific flavour.";
           reference
             "GS NFV IFA014: Section 6.5.2.2 NsVirtualLinkDesc
-            information element";
+             information element";
 
           leaf id {
             type string;
             description
               "Identifies this VirtualLinkDf information element
-              within a VLD.";
+               within a VLD.";
             reference
               "GS NFV IFA014: Section 6.5.4.2 VirtualLinkDf
-              information element";
+               information element";
           }
 
           container qos {
             description
               "The QoS information element specifies quality of
-              service parameters applicable to a VL.";
+               service parameters applicable to a VL.";
             reference
               "GS NFV IFA014: Section 6.5.4.2 VirtualLinkDf
-              information element";
+               information element";
 
             leaf latency {
               mandatory true;
@@ -287,7 +284,7 @@ submodule etsi-nfv-ns {
                 "Specifies the maximum latency in ms.";
               reference
                 "GS NFV IFA014: Section 6.5.6.2 QoS information
-                element";
+                 element";
             }
 
             leaf packet-delay-variation {
@@ -298,7 +295,7 @@ submodule etsi-nfv-ns {
                 "Specifies the maximum jitter in ms.";
               reference
                 "GS NFV IFA014: Section 6.5.6.2 QoS information
-                element";
+                 element";
             }
 
             leaf packet-loss-ratio {
@@ -310,17 +307,17 @@ submodule etsi-nfv-ns {
                 "Specifies the maximum packet loss ratio.";
               reference
                 "GS NFV IFA014: Section 6.5.6.2 QoS information
-                element";
+                 element";
             }
 
             leaf priority {
               type uint32;
               description
                 "Specifies the priority level in case of
-                congestion on the underlying physical links.";
+                 congestion on the underlying physical links.";
               reference
                 "GS NFV IFA014: Section 6.5.6.2 QoS information
-                element";
+                 element";
             }
           }
 
@@ -332,13 +329,13 @@ submodule etsi-nfv-ns {
             }
             description
               "Specifies one of the three levels defined in ETSI
-              ETSI GS NFV-REL 001 [i.5]
-              * Level 1.
-              * Level 2.
-              * Level 3.";
+               ETSI GS NFV-REL 001 [i.5]
+                 * Level 1.
+                 * Level 2.
+                 * Level 3.";
             reference
               "GS NFV IFA014: Section 6.5.4.2 VirtualLinkDf
-              information element";
+               information element";
           }
         }
 
@@ -352,17 +349,17 @@ submodule etsi-nfv-ns {
             "Specifies test access facilities expected on the VL.";
           reference
             "GS NFV IFA014: Section 6.5.2.2 NsVirtualLinkDesc
-            information element";
+             information element";
         }
 
         leaf description {
           type string;
           description
             "Provides human-readable information on the purpose of
-            the virtual link (e.g. VL for control plane traffic).";
+             the virtual link (e.g. VL for control plane traffic).";
           reference
             "GS NFV IFA014: Section 6.5.2.2 NsVirtualLinkDesc
-            information element";
+             information element";
         }
         uses common:security-parameters;
       }
@@ -372,19 +369,19 @@ submodule etsi-nfv-ns {
 
         description
           "Provides the descriptors of the applicable forwarding
-          graphs.";
+           graphs.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
 
         leaf id {
           type string;
           description
             "Identifier of this Vnffgd information element. It
-            uniquely identifies a VNFFGD.";
+             uniquely identifies a VNFFGD.";
           reference
             "GS NFV IFA014: Section 6.4.2.2 Vnffgd information
-            element";
+             element";
         }
 
         leaf-list vnf-profile-id {
@@ -395,7 +392,7 @@ submodule etsi-nfv-ns {
             "References the VnfProfile of a constituent VNF.";
           reference
             "GS NFV IFA014: Section 6.4.2.2 Vnffgd information
-            element";
+             element";
         }
 
         leaf-list pnf-profile-id {
@@ -406,7 +403,7 @@ submodule etsi-nfv-ns {
             "References the PnfProfile of a constituent PNF.";
           reference
             "GS NFV IFA014: Section 6.4.2.2 Vnffgd information
-            element";
+             element";
         }
 
         leaf-list nested-ns-profile-id {
@@ -417,7 +414,7 @@ submodule etsi-nfv-ns {
             "References the NsProfile of a nestedNS.";
           reference
             "GS NFV IFA014: Section 6.4.2.2 Vnffgd information
-            element";
+             element";
         }
 
         leaf virtual-link-profile-id {
@@ -426,54 +423,38 @@ submodule etsi-nfv-ns {
           }
           description
             "References the Virtual Link Profile of a constituent
-            VL.";
+             VL.";
           reference
             "GS NFV IFA014: Section 6.4.2.2 Vnffgd information
-            element";
+             element";
         }
 
         list cpd-pool {
-          // This is supposed to be a reference to a CpdPool.
-          // However, it is not clear where CpdPool is maintained.
-          // For now it is maintained here.
           key "id";
 
           description
-            "A reference to a pool of descriptors of connection
-            points attached to one of the constituent VNFs and PNFs
-            and/or one of the SAPs of the parent NS or of a nested
-            NS.";
+            "A pool of descriptors of connection points attached to
+             one of the constituent VNFs and PNFs and/or one of the
+             SAPs of the parent NS or of a nested NS.";
           reference
             "GS NFV IFA014: Section 6.4.2.2 Vnffgd information
-            element";
+             element";
 
           leaf id {
             type string;
             description
               "Identifier of this CpdPool information element. It
-            identifies a pool of descriptors of connection points
-            and NS SAPs.";
+               identifies a pool of descriptors of connection points
+               and NS SAPs.";
             reference
               "GS NFV IFA014: Section 6.4.4.2 CpdPool information
-            element";
-          }
-
-          leaf df-id {
-            type leafref {
-              path "../../../df/id";
-            }
+               element";
           }
 
           choice cpd-id {
             container vnf {
-              leaf vnf-profile-id {
-                type leafref {
-                  path "deref(../../df-id)/../vnf-profile/id";
-                }
-              }
               leaf vnfd-id {
-                must ". = deref(../vnfd-profile-id)/../vnfd-id" {
-                  // tailf:dependency "/nfv/nsd/df/vnf-profile/vnfd-id";
+                must ". = deref(../../vnfd-profile-id)/../vnfd-id" {
                 }
                 type leafref {
                   path "/nfv/vnfd/id";
@@ -486,14 +467,8 @@ submodule etsi-nfv-ns {
               }
             }
             container pnf {
-              leaf pnf-profile-id {
-                type leafref {
-                  path "deref(../../df-id)/../pnf-profile/id";
-                }
-              }
               leaf pnfd-id {
-                must ". = deref(../pnfd-profile-id)/../pnfd-id" {
-                  // tailf:dependency "/nfv/nsd/df/pnf-profile/pnfd-id";
+                must ". = deref(../../pnfd-profile-id)/../pnfd-id" {
                 }
                 type leafref {
                   path "/nfv/pnfd/id";
@@ -506,14 +481,8 @@ submodule etsi-nfv-ns {
               }
             }
             container ns {
-              leaf ns-profile-id {
-                type leafref {
-                  path "deref(../../df-id)/../ns-profile/id";
-                }
-              }
               leaf nsd-id {
-                must ". = deref(../ns-profile-id)/../nsd-id" {
-                  // tailf:dependency "/nfv/nsd/df/ns-profile/nsd-id";
+                must ". = deref(../../ns-profile-id)/../nsd-id" {
                 }
 
                 type leafref {
@@ -528,11 +497,11 @@ submodule etsi-nfv-ns {
             }
             description
               "A reference to the descriptor of a connection point
-              attached to one of the constituent VNFs and PNFs or to
-              the descriptor of a NS SAP.";
+               attached to one of the constituent VNFs and PNFs or to
+               the descriptor of a NS SAP.";
             reference
               "GS NFV IFA014: Section 6.4.4.2 CpdPool information
-              element";
+               element";
           }
         }
 
@@ -543,28 +512,28 @@ submodule etsi-nfv-ns {
             "The network forwarding path associated to the VNFFG.";
           reference
             "GS NFV IFA014: Section 6.4.2.2 Vnffgd information
-            element";
+             element";
 
           leaf id {
             type string;
             description
               "Identifies this nfpd information element within a
-              VNFFGD.";
+               VNFFGD.";
             reference
               "GS NFV IFA014: Section 6.4.3.2 Nfpd information
-              element";
+               element";
           }
 
           leaf rule {
             type string;
             description
               "Provides an NFP classification and selection rule.
-              The rule may be expressed as a criteria constructed
-              out of atomic assertions linked by Boolean operators
-              AND, OR and NOT.";
+               The rule may be expressed as a criteria constructed
+               out of atomic assertions linked by Boolean operators
+               AND, OR and NOT.";
             reference
               "GS NFV IFA014: Section 6.4.3.2 Nfpd information
-              element";
+               element";
           }
 
           list position-desc-id {
@@ -572,19 +541,19 @@ submodule etsi-nfv-ns {
 
             description
               "Describes a position in the NFP in terms of one or
-              more CP profiles and rules for distributing the
-              traffic among CP and SAP instances created from the
-              CPD or SAPD associated to these profiles. This shall
-              be connection point profile, which is either a CPD
-              associated with the VnfProfile of a constituent VNF,
-              or a CPD associated with the PnfProfile of a
-              constituent PNF, or a SAPD associated with the
-              NsProfile of a nested NS. The related VnfProfile,
-              PnfProfile and NsProfile shall be included in the
-              parent VNFFGD.";
+               more CP profiles and rules for distributing the
+               traffic among CP and SAP instances created from the
+               CPD or SAPD associated to these profiles. This shall
+               be connection point profile, which is either a CPD
+               associated with the VnfProfile of a constituent VNF,
+               or a CPD associated with the PnfProfile of a
+               constituent PNF, or a SAPD associated with the
+               NsProfile of a nested NS. The related VnfProfile,
+               PnfProfile and NsProfile shall be included in the
+               parent VNFFGD.";
             reference
               "GS NFV IFA014: Section 6.4.3.2 Nfpd information
-              element";
+               element";
 
             leaf id {
               type string;
@@ -592,7 +561,7 @@ submodule etsi-nfv-ns {
                 "Identifier of this NfpPositionDesc element.";
               reference
                 "GS NFV IFA014: Section 6.4.5.2 NfpPositionDesc
-                information element";
+                 information element";
             }
 
             list cp-profile-id {
@@ -600,23 +569,23 @@ submodule etsi-nfv-ns {
 
               description
                 "References the profile of a connection point to be
-                traversed by the traffic flows matching the criteria.
-                This shall be a connection point attached to one of
-                the constituent VNFs and PNFs of the parent VNFFG,
-                or a SAP of one of the constituent nested NSs of the
-                parent VNFFG.";
+                 traversed by the traffic flows matching the criteria.
+                 This shall be a connection point attached to one of
+                 the constituent VNFs and PNFs of the parent VNFFG,
+                 or a SAP of one of the constituent nested NSs of the
+                 parent VNFFG.";
               reference
                 "GS NFV IFA014: Section 6.4.5.2 NfpPositionDesc
-                information element";
+                 information element";
 
               leaf id {
                 type string;
                 description
                   "Identifier of this CpProfile information element.
-                  It uniquely identifies a CpProfile.";
+                   It uniquely identifies a CpProfile.";
                 reference
                   "GS NFV IFA014: Section 6.4.6.2 CpProfile
-                  information element";
+                   information element";
               }
 
               list constituent-profile-elements {
@@ -626,7 +595,7 @@ submodule etsi-nfv-ns {
                   "Specifies the constituents of the CpProfile.";
                 reference
                   "GS NFV IFA014: Section 6.4.6.2 CpProfile
-                  information element";
+                   information element";
 
                 leaf id {
                   type string;
@@ -634,19 +603,19 @@ submodule etsi-nfv-ns {
                     "Specifies the constituents of the CpProfile.";
                   reference
                     "GS NFV IFA014: Section 6.4.7.2
-                    ConstituentProfileElements information element";
+                     ConstituentProfileElements information element";
                 }
 
                 leaf cpd-id {
                   type string;
                   description
                     "References the VNF external CPD for a given
-                    VnfProfile, or the PNF external CPD for a given
-                    PnfProfile, or a NS SAPD for a give NsProfile
-                    identified by the constituentBasedElementId.";
+                     VnfProfile, or the PNF external CPD for a given
+                     PnfProfile, or a NS SAPD for a give NsProfile
+                     identified by the constituentBasedElementId.";
                   reference
                     "GS NFV IFA014: Section 6.4.7.2
-                    ConstituentProfileElements information element";
+                     ConstituentProfileElements information element";
                 }
               }
             }
@@ -654,31 +623,6 @@ submodule etsi-nfv-ns {
         }
       }
 
-      list monitored-info {
-        key "id";
-        leaf id {
-          type string;
-        }
-
-        choice source {
-          // We have no way of refererencing a VNF MP today
-          container ns-monitoring-parameter {
-            uses common:monitoring-parameter;
-          }
-          container vnf-indicator {
-            leaf vnfd {
-              type leafref {
-                path "/nfv/vnfd/id";
-              }
-            }
-            leaf indicator {
-              type leafref {
-                path "deref(../vnfd)/../indicator/id";
-              }
-            }
-          }
-        }
-      }
       leaf-list autoscale-rule {
         type string;
       }
@@ -695,7 +639,7 @@ submodule etsi-nfv-ns {
       list df {
         min-elements 1;
         must "default-instantiation-level or " +
-          "count(ns-level) = 1" {
+          "count(ns-instantiation-level) = 1" {
           error-message
             "default-instantiation-level must be present if there " +
             "multiple instantion-level";
@@ -708,28 +652,29 @@ submodule etsi-nfv-ns {
           "Identifies a DF within the scope of an NSD.";
         reference
           "GS NFV IFA014: Section 6.2.2.2 Network Service Descriptor
-          information element";
+           information element";
 
         leaf id {
           type string;
           description
             "Identifies this NsDf information element. It identifies
-            a NS DF within the NSD.";
+             a NS DF within the NSD.";
           reference
             "GS NFV IFA014: Section 6.3.2.2 NsDf information element";
         }
 
         leaf flavor-key {
           type leafref {
-            path "../../monitored-info/id";
+            path "../monitored-info/id";
           }
           description
             "Assurance parameter against which this flavour is being
-            described.
-            The key can be a combination of multiple assurance
-            parameters with a logical relationship between them.
-            The parameters should be present as a monitoredInfo
-            attribute in the NSD.";
+             described.
+
+             The key can be a combination of multiple assurance
+             parameters with a logical relationship between them.
+             The parameters should be present as a monitoredInfo
+             attribute in the NSD.";
           reference
             "GS NFV IFA014: Section 6.3.2.2 NsDf information element";
         }
@@ -751,10 +696,10 @@ submodule etsi-nfv-ns {
             type string;
             description
               "Identifier of this vnfProfile information element. It
-              uniquely identifies a VnfProfile.";
+               uniquely identifies a VnfProfile.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
           }
 
           leaf vnfd-id {
@@ -766,7 +711,7 @@ submodule etsi-nfv-ns {
               "References a VNFD.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
           }
 
           leaf flavor-id {
@@ -778,7 +723,7 @@ submodule etsi-nfv-ns {
               "Identifies a flavour within the VNFD.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
           }
 
           leaf instantiation-level {
@@ -788,12 +733,12 @@ submodule etsi-nfv-ns {
             }
             description
               "Identifier of the instantiation level of the VNF DF
-              to be used for instantiation. If not present, the
-              default instantiation level as declared in the VNFD
-              shall be used.";
+               to be used for instantiation. If not present, the
+               default instantiation level as declared in the VNFD
+               shall be used.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
           }
 
           leaf min-number-of-instances {
@@ -801,10 +746,10 @@ submodule etsi-nfv-ns {
             type uint16;
             description
               "Minimum number of instances of the VNF based on this
-              VNFD that is permitted to exist for this VnfProfile.";
+               VNFD that is permitted to exist for this VnfProfile.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
           }
 
           leaf max-number-of-instances {
@@ -812,10 +757,10 @@ submodule etsi-nfv-ns {
             type uint16;
             description
               "Maximum number of instances of the VNF based on this
-              VNFD that is permitted to exist for this VnfProfile.";
+               VNFD that is permitted to exist for this VnfProfile.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
           }
 
           uses common:local-affinity-or-anti-affinity-rule;
@@ -825,10 +770,10 @@ submodule etsi-nfv-ns {
 
             description
               "Identifier(s) of the affinity or anti-affinity
-              group(s) the VnfProfile belongs to.";
+               group(s) the VnfProfile belongs to.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
 
             leaf id {
               type leafref {
@@ -842,11 +787,11 @@ submodule etsi-nfv-ns {
 
             description
               "Defines the connection information of the VNF, it
-              contains connection relationship between a VNF
-              connection point and a NS Virtual Link.";
+               contains connection relationship between a VNF
+               connection point and a NS Virtual Link.";
             reference
               "GS NFV IFA014: Section 6.3.3.2 VnfProfile information
-              element";
+               element";
 
             leaf virtual-link-profile-id {
               type leafref {
@@ -856,7 +801,7 @@ submodule etsi-nfv-ns {
                 "Reference an NS VL profile.";
               reference
                 "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
-                information element.";
+                 information element.";
             }
 
             leaf-list cpd-id {
@@ -865,12 +810,12 @@ submodule etsi-nfv-ns {
               }
               description
                 "References the descriptor of a connection point on a
-                VNF/PNF or a SAP which connects to virtual links
-                instantiated from the profile identified in the
-                virtualLinkProfileId attribute.";
+                 VNF/PNF or a SAP which connects to virtual links
+                 instantiated from the profile identified in the
+                 virtualLinkProfileId attribute.";
               reference
                 "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
-                information element.";
+                 information element.";
             }
           }
         }
@@ -887,10 +832,10 @@ submodule etsi-nfv-ns {
             type string;
             description
               "Identifier of this PnfProfile information element.
-              It uniquely identifies a PnfProfile.";
+               It uniquely identifies a PnfProfile.";
             reference
               "GS NFV IFA014: Section 6.3.6.2 PnfProfile information
-              element";
+               element";
           }
 
           leaf pnfd-id {
@@ -901,7 +846,7 @@ submodule etsi-nfv-ns {
               "References a PNFD.";
             reference
               "GS NFV IFA014: Section 6.3.6.2 PnfProfile information
-              element";
+               element";
           }
 
           list virtual-link-connectivity {
@@ -909,11 +854,11 @@ submodule etsi-nfv-ns {
 
             description
               "Defines the connection information of the PNF, it
-              contains connection relationship between a PNF
-              connection point and a NS Virtual Link.";
+               contains connection relationship between a PNF
+               connection point and a NS Virtual Link.";
             reference
               "GS NFV IFA014: Section 6.3.6.2 PnfProfile information
-              element";
+               element";
 
             leaf virtual-link-profile-id {
               type leafref {
@@ -923,7 +868,7 @@ submodule etsi-nfv-ns {
                 "Reference an NS VL profile.";
               reference
                 "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
-                information element.";
+                 information element.";
             }
 
             leaf-list cpd-id {
@@ -932,12 +877,12 @@ submodule etsi-nfv-ns {
               }
               description
                 "References the descriptor of a connection point on a
-                VNF/PNF or a SAP which connects to virtual links
-                instantiated from the profile identified in the
-                virtualLinkProfileId attribute.";
+                 VNF/PNF or a SAP which connects to virtual links
+                 instantiated from the profile identified in the
+                 virtualLinkProfileId attribute.";
               reference
                 "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
-                information element.";
+                 information element.";
             }
           }
         }
@@ -954,10 +899,10 @@ submodule etsi-nfv-ns {
             type string;
             description
               "Uniquely identifies this VirtualLinkProfile
-              information element.";
+               information element.";
             reference
               "GS NFV IFA014: Section 6.3.2.2 VirtualLinkProfile
-              information element";
+               information element";
           }
 
           leaf virtual-link-desc-id {
@@ -969,7 +914,7 @@ submodule etsi-nfv-ns {
               "Uniquely references a VLD.";
             reference
               "GS NFV IFA014: Section 6.3.2.2 VirtualLinkProfile
-              information element";
+               information element";
           }
 
           leaf flavor-id {
@@ -981,7 +926,7 @@ submodule etsi-nfv-ns {
               "Identifies a flavour within the VLD.";
             reference
               "GS NFV IFA014: Section 6.3.2.2 VirtualLinkProfile
-              information element";
+               information element";
           }
 
           uses common:local-affinity-or-anti-affinity-rule;
@@ -991,11 +936,11 @@ submodule etsi-nfv-ns {
 
             description
               "Identifies an affinity or anti-affinity group the
-              VLs instantiated according to the VlProfile belong
-              to.";
+               VLs instantiated according to the VlProfile belong
+               to.";
             reference
               "GS NFV IFA014: Section 6.3.4.2 VirtualLinkProfile
-              information element";
+               information element";
 
             leaf id {
               type leafref {
@@ -1007,19 +952,19 @@ submodule etsi-nfv-ns {
           container max-bitrate-requirements {
             description
               "Specifies the maximum bitrate requirements for a VL
-              instantiated according to this profile.";
+               instantiated according to this profile.";
             reference
               "GS NFV IFA014: Section 6.3.4.2 VirtualLinkProfile
-              information element";
+               information element";
             uses common:link-bitrate-requirements;
           }
           container min-bitrate-requirements {
             description
               "Specifies the minimum bitrate requirements for a VL
-              instantiated according to this profile.";
+               instantiated according to this profile.";
             reference
               "GS NFV IFA014: Section 6.3.4.2 VirtualLinkProfile
-              information element";
+               information element";
             uses common:link-bitrate-requirements;
           }
         }
@@ -1036,42 +981,42 @@ submodule etsi-nfv-ns {
             type string;
             description
               "Identifier of this NsScalingAspect information element.
-              It uniquely identifies the NS scaling aspect in an
-              NSD.";
+               It uniquely identifies the NS scaling aspect in an
+               NSD.";
             reference
               "GS NFV IFA014: Section 6.7.2.2 NsScalingAspect
-              information element";
+               information element";
           }
 
           leaf name {
             type string;
             description
               "Provides a human readable name of the NS scaling
-              aspect.";
+               aspect.";
             reference
               "GS NFV IFA014: Section 6.7.2.2 NsScalingAspect
-              information element";
+               information element";
           }
 
           leaf description {
             type string;
             description
               "Provides a human readable description of the NS
-              scaling aspect.";
+               scaling aspect.";
             reference
               "GS NFV IFA014: Section 6.7.2.2 NsScalingAspect
-              information element";
+               information element";
           }
 
           leaf scaling-level {
             type leafref {
-              path "../../ns-level/id";
+              path "../../ns-instantiation-level/id";
             }
             description
               "Describes the details of an NS level.";
             reference
               "GS NFV IFA014: Section 6.7.2.2 NsScalingAspect
-              information element";
+               information element";
           }
         }
 
@@ -1080,22 +1025,22 @@ submodule etsi-nfv-ns {
 
           description
             "Specifies affinity or anti-affinity relationship
-            applicable between the VNF instances created using
-            different VNFDs, the Virtual Link instances created
-            using different NsVirtualLinkDescs or the nested NS
-            instances created using different NSDs in the same
-            affinity or anti-affinity group.";
+             applicable between the VNF instances created using
+             different VNFDs, the Virtual Link instances created
+             using different NsVirtualLinkDescs or the nested NS
+             instances created using different NSDs in the same
+             affinity or anti-affinity group.";
           reference
             "GS NFV IFA014: Section 6.3.2.2 NsDf information element";
 
           leaf id {
             type string;
             description
-              "Identifier of Identifier of this
-              AffinityOrAntiAffinityGroup information element.";
+              "Identifier of Identifier of this 
+               AffinityOrAntiAffinityGroup information element.";
             reference
               "GS NFV IFA014: Section 6.3.5.2 AffinityOrAntiAffinity
-              information element";
+               information element";
           }
 
           leaf affinity-type {
@@ -1103,10 +1048,10 @@ submodule etsi-nfv-ns {
             type common:affinity-type;
             description
               "Specifies the type of relationship that the members of
-              the group have: 'affinity' or 'anti-affinity.'";
+               the group have: 'affinity' or 'anti-affinity.'";
             reference
               "GS NFV IFA014: Section 6.3.5.2 AffinityOrAntiAffinity
-              information element";
+               information element";
           }
 
           leaf affinity-scope {
@@ -1114,14 +1059,14 @@ submodule etsi-nfv-ns {
             type common:affinity-scope;
             description
               "Specifies the scope of the affinity or anti-affinity
-              relationship e.g. a NFVI node, an NFVI PoP, etc.";
+               relationship e.g. a NFVI node, an NFVI PoP, etc.";
             reference
               "GS NFV IFA014: Section 6.3.5.2 AffinityOrAntiAffinity
-              information element";
+               information element";
           }
         }
 
-        list ns-level {
+        list ns-instantiation-level {
           min-elements 1;
           key "id";
 
@@ -1129,17 +1074,17 @@ submodule etsi-nfv-ns {
             "Describes the details of an NS level.";
           reference
             "GS NFV IFA014: Section 6.3.2.2 NsDf information element
-            GS NFV IFA014: Section 6.7.2.2 NsScaling information
-            element";
+             GS NFV IFA014: Section 6.7.2.2 NsScaling information
+             element";
 
           leaf id {
             type string;
             description
               "Identifier of this NsLevel information element. It
-              uniquely identifies an NS level within the DF.";
+               uniquely identifies an NS level within the DF.";
             reference
               "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-              element";
+               element";
           }
 
           leaf description {
@@ -1148,7 +1093,7 @@ submodule etsi-nfv-ns {
               "Human readable description of the NS level.";
             reference
               "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-              element";
+               element";
           }
 
           list vnf-to-level-mapping {
@@ -1156,11 +1101,11 @@ submodule etsi-nfv-ns {
 
             description
               "Specifies the profile of the VNFs involved in this NS
-              level and, for each of them, the required number of
-              instances.";
+               level and, for each of them, the required number of
+               instances.";
             reference
               "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-              element";
+               element";
 
             leaf vnf-profile-id {
               type leafref {
@@ -1168,10 +1113,10 @@ submodule etsi-nfv-ns {
               }
               description
                 "Identifies the profile to be used for a VNF
-                involved in an NS level.";
+                 involved in an NS level.";
               reference
                 "GS NFV IFA014: Section 6.7.4.2 VnfToLevelMapping
-                information element";
+                 information element";
             }
 
             leaf number-of-instances {
@@ -1179,10 +1124,10 @@ submodule etsi-nfv-ns {
               type uint32;
               description
                 "Specifies the number of VNF instances required for
-                an NS level.";
+                 an NS level.";
               reference
                 "GS NFV IFA014: Section 6.7.4.2 VnfToLevelMapping
-                information element";
+                 information element";
             }
           }
 
@@ -1191,10 +1136,10 @@ submodule etsi-nfv-ns {
 
             description
               "Specifies the profile of the VLs involved in this NS
-              level and, for each of them, the needed bandwidth.";
+               level and, for each of them, the needed bandwidth.";
             reference
               "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-              element";
+               element";
 
             leaf virtual-link-profile-id {
               type leafref {
@@ -1202,10 +1147,10 @@ submodule etsi-nfv-ns {
               }
               description
                 "Identifies the profile to be used for a VL involved
-                in an NS level.";
+                 in an NS level.";
               reference
                 "GS NFV IFA014: Section 6.7.5.2
-                VirtualLinkToLevelMapping information element";
+                 VirtualLinkToLevelMapping information element";
             }
 
             uses common:link-bitrate-requirements;
@@ -1216,11 +1161,11 @@ submodule etsi-nfv-ns {
 
             description
               "Specifies the profile of the nested NSs involved in
-              this NS level and, for each of them, the required
-              number of instances.";
+               this NS level and, for each of them, the required
+               number of instances.";
             reference
               "GS NFV IFA014: Section 6.3.9.2 NsLevel information
-              element";
+               element";
 
             leaf ns-profile-id {
               type leafref {
@@ -1228,10 +1173,10 @@ submodule etsi-nfv-ns {
               }
               description
                 "Identifies the profile to be used for a nested NS
-                involved in the NS level.";
+                 involved in the NS level.";
               reference
                 "GS NFV IFA014: Section 6.7.6.2 NsToLevel information
-                element";
+                 element";
             }
 
             leaf number-of-instances {
@@ -1239,10 +1184,10 @@ submodule etsi-nfv-ns {
               type uint32;
               description
                 "Specifies the number of nested NS instances required
-                for the NS scale level.";
+                 for the NS scale level.";
               reference
                 "GS NFV IFA014: Section 6.7.6.2 NsToLevel information
-                element";
+                 element";
             }
           }
 
@@ -1265,12 +1210,12 @@ submodule etsi-nfv-ns {
 
         leaf default-instantiation-level {
           type leafref {
-            path "../ns-level/id";
+            path "../ns-instantiation-level/id";
           }
           description
             "Identifies the NS level which represents the default NS
-            instantiation level for this DF. It shall be present if
-            there are multiple 'nsIinstantiationLevel' entries.";
+             instantiation level for this DF. It shall be present if
+             there are multiple 'nsIinstantiationLevel' entries.";
           reference
             "GS NFV IFA014: Section 6.3.2.2 NsDf information element";
         }
@@ -1299,7 +1244,7 @@ submodule etsi-nfv-ns {
               "Identifies an NS profile.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
           }
           leaf nsd-id {
             mandatory true;
@@ -1308,10 +1253,10 @@ submodule etsi-nfv-ns {
             }
             description
               "Identifies the NSD applicable to NS instantiated
-              according to this profile.";
+               according to this profile.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
           }
           leaf ns-df-id {
             mandatory true;
@@ -1320,46 +1265,46 @@ submodule etsi-nfv-ns {
             }
             description
               "Identifies the applicable network service DF within
-              the scope of the NSD.";
+               the scope of the NSD.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
           }
           leaf instantiation-level-id {
             mandatory true;
             type leafref {
-              path "deref(../ns-df-id)/../ns-level/id";
+              path "deref(../ns-df-id)/../ns-instantiation-level/id";
             }
             description
               "Identifies the NS level within the referenced NS DF to
-              be used in the context of the parent NS instantiation.
-              If not present, the default NS instantiation level as
-              declared in the referenced NSD shall be used.";
+               be used in the context of the parent NS instantiation.
+               If not present, the default NS instantiation level as
+               declared in the referenced NSD shall be used.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
           }
           leaf min-number-of-instances {
             type uint16;
             mandatory true;
             description
               "Minimum number of nested NS instances based on the
-              referenced NSD that is permitted to exist for this
-              NsProfile.";
+               referenced NSD that is permitted to exist for this
+               NsProfile.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
           }
           leaf max-number-of-instances {
             type uint16;
             mandatory true;
             description
               "Maximum number of nested NS instances based on the
-              referenced NSD that is permitted to exist for this
-              NsProfile.";
+               referenced NSD that is permitted to exist for this
+               NsProfile.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
           }
 
           list affinity-or-anti-affinity-group-id {
@@ -1367,10 +1312,10 @@ submodule etsi-nfv-ns {
 
             description
               "Identifies an affinity or anti-affinity group the NSs
-              created according to this NsProfile belongs to.";
+               created according to this NsProfile belongs to.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
 
             leaf id {
               type leafref {
@@ -1390,28 +1335,28 @@ submodule etsi-nfv-ns {
                 "Reference an NS VL profile.";
               reference
                 "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
-                information element.";
+                 information element.";
             }
             leaf-list cpd-id {
               type leafref {
                 path "deref(../../nsd-id)/../sapd/id";
               }
-              description
+	      description
                 "References the descriptor of a connection point on a
-                VNF/PNF or a SAP which connects to virtual links
-                instantiated from the profile identified in the
-                virtualLinkProfileId attribute.";
+                 VNF/PNF or a SAP which connects to virtual links
+                 instantiated from the profile identified in the
+                 virtualLinkProfileId attribute.";
               reference
                 "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
-                information element.";
-            }
+                 information element.";
+	    }
             description
               "Defines the connection information of the NS, it
-              contains connection relationship between an NS SAP and
-              a NS virtual Link of the composite NS.";
+               contains connection relationship between an NS SAP and
+               a NS virtual Link of the composite NS.";
             reference
               "GS NFV IFA014: Section 6.3.11.2 NsProfile information
-              element";
+               element";
           }
         }
 
@@ -1420,7 +1365,7 @@ submodule etsi-nfv-ns {
 
           description
             "Specifies the order in which instances of the VNFs and/or
-            nested NSs have to be created.";
+             nested NSs have to be created.";
           reference
             "GS NFV IFA014: Section 6.3.2.2 NsDf information element";
 
@@ -1442,8 +1387,7 @@ submodule etsi-nfv-ns {
               "References a VnfProfile or NsProfile.";
             reference
               "GS NFV IFA014: Section 6.3.12.2 Dependencies
-              information element";
-
+               information element";
           }
           choice secondary-id {
             leaf secondary-vnf-profile {
@@ -1460,9 +1404,82 @@ submodule etsi-nfv-ns {
               "References a VnfProfile or NsProfile.";
             reference
               "GS NFV IFA014: Section 6.3.12.2 Dependencies
-              information element";
+               information element";
           }
         }
+
+       list monitored-info {
+         key "id";
+         
+         leaf id {
+           type string;
+         }
+
+         container vnf-indicator-info {
+           leaf vnfd-id {
+             type leafref {
+               path "/nfv/vnfd/id";
+             }
+             description
+               "Identifies a VNFD.";
+             reference
+               "GS NFV IFA014: Section 6.2.7.2 VnfIndicatorData
+                 information element";
+           }
+           leaf vnf-indicator {
+             mandatory true;
+             type leafref {
+               path "deref(../vnfd-id)/../indicator/id";
+             }
+             description
+               "Identifies a VNF indicator within the VNFD.";
+             reference
+               "GS NFV IFA014: Section 6.2.7.2 VnfIndicatorData
+                 information element";
+           }
+           description
+             "Uniquely identifies this VNF Indicator information
+               element.";
+            reference
+              "GS NFV IFA014: Section 6.2.6.2 MonitoredData
+               information element";
+         }
+
+         // monitoringParameter in IFA014 is defined by MonitoredData
+         // whereas monitoringParameter in IFA011 is defined by
+         // MonitoringParameter. 
+         container monitoring-parameter {
+           leaf id {
+             type string;
+             description
+               "Unique identifier of this monitoring parameter
+                 information element.";
+             reference
+               "GS NFV IFA014: Section 6.2.8.2 MonitoringParameter
+                 information element";
+           }
+
+           leaf name {
+             type string;
+             description
+               "Human readable name of the monitoring parameter.";
+             reference
+               "GS NFV IFA014: Section 6.2.8.2 MonitoringParameter
+                 information element";
+           }
+
+           leaf performance-metric {
+             mandatory true;
+             type string;
+             description
+               "Defines the virtualised resource-related performance
+                 metric.";
+             reference
+               "GS NFV IFA014: Section 6.2.8.2 MonitoringParameter
+                 information element";
+           }
+         }
+       }
       }
       uses common:security-parameters;
     }
