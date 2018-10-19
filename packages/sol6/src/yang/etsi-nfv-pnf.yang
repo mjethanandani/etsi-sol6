@@ -11,11 +11,6 @@ submodule etsi-nfv-pnf {
     prefix common;
   }
 
-  /*
-   * Include
-   */
-  include etsi-nfv-ns;
-
   description
     "Models for PNFD according to GS NFV-IFA 014.";
 

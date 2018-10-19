@@ -13,7 +13,6 @@ submodule etsi-nfv-vnf {
   import etsi-nfv-common {
     prefix common;
   }
-  include etsi-nfv-ns;
 
   description
     "Models for VNFD according to GS NFV-IFA 011.";

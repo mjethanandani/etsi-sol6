@@ -8,6 +8,9 @@ submodule etsi-nfv-ns {
     prefix common;
   }
 
+  include etsi-nfv-vnf;
+  include etsi-nfv-pnf;
+
   description
     "Models for NS according to ETSI GS NFV-IFA 014.";
 
@@ -162,7 +165,7 @@ submodule etsi-nfv-ns {
             leaf vnfd-id {
               mandatory true;
               type leafref {
-                path "/nfv:nfv/nfv:vnfd/nfv:id";
+                path "../../../../nfv:vnfd/nfv:id";
               }
               must "boolean(../../../vnfd-id[.=current()])";
             }
@@ -178,7 +181,7 @@ submodule etsi-nfv-ns {
             leaf pnfd-id {
               mandatory true;
                 type leafref {
-                path "/nfv:nfv/nfv:pnfd/nfv:id";
+                path "../../../../nfv:pnfd/nfv:id";
               }
               must "boolean(../pnfd-id[.=current()])";
             }
@@ -194,7 +197,7 @@ submodule etsi-nfv-ns {
             leaf nsd-id {
             mandatory true;
               type leafref {
-                path "/nfv:nfv/nfv:nsd/nfv:id";
+                path "../../../../nfv:nsd/nfv:id";
               }
               must "boolean(../nsd-id[.=current()])";
 	    }
