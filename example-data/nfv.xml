@@ -265,7 +265,7 @@
         </df>
       </virtual-link-desc>
       <df>
-        <id>fw-router</id>
+        <id>router-fw</id>
         <vnf-profile>
           <id>firewall</id>
           <vnfd-id>ASA</vnfd-id>
@@ -334,7 +334,7 @@
         </ns-instantiation-level>
       </df>
       <df>
-        <id>fw-router-dpi</id>
+        <id>router-fw-dpi</id>
         <vnf-profile>
           <id>firewall</id>
           <vnfd-id>ASA</vnfd-id>
