@@ -15,6 +15,7 @@ confdc -c $CONFD_OPTS -o /opt/confd/etc/confd/etsi-nfv.fxs etsi-nfv.yang
 
 echo "Starting ConfD"
 confd
+confd --wait-started
 
 echo "Loading Data"
 confd_load -l -m nfv.xml
