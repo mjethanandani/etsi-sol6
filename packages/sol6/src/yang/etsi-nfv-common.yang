@@ -384,18 +384,18 @@ module etsi-nfv-common {
        mode or not.";
     reference
       "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
-    
+
     leaf id {
       type string;
       description
-	"Identifier of this Cpd information element.";
+        "Identifier of this Cpd information element.";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
     leaf layer-protocol {
       mandatory true;
       type identityref {
-	base common:layer-protocol;
+        base common:layer-protocol;
       }
       description
         "Identifies a protocol that the connection points
@@ -406,37 +406,37 @@ module etsi-nfv-common {
     }
     leaf role {
       type identityref {
-	base common:cp-role;
+        base common:cp-role;
       }
       description
-	"Identifies the role of the connection points
+        "Identifies the role of the connection points
          corresponding to the CPD in the context of the traffic
          flow patterns in the VNF, PNF or NS. For example an NS with
          a tree flow pattern within the NS will have legal cpRoles
          of ROOT and LEAF.";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
     leaf description {
       type string;
       description
-	"Provides human-readable information on the purpose of the
+        "Provides human-readable information on the purpose of the
          connection point (e.g. connection point for control plane
          traffic).";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
     leaf trunk-mode {
       type boolean;
       description
-	"Information about whether the Cp instantiated from this CPD
+        "Information about whether the Cp instantiated from this CPD
          is in Trunk mode (802.1Q or other). When operating in
          'trunk mode', the Cp is capable of carrying traffic for
          several VLANs. A cardinality of 0 implies that trunkMode
          is not configured for the Cp i.e. It is equivalent to
          Boolean value 'false'.";
       reference
-	"GS NFC IFA014: Section 6.6.3.1 Cpd information element";
+        "GS NFC IFA014: Section 6.6.3.1 Cpd information element";
     }
   }
 }
