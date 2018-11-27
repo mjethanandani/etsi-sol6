@@ -64,3 +64,7 @@ glog:
 container-test:
 	docker build -t etsi-test .
 	docker run --rm -it etsi-test
+
+nfv-swagger.json: packages/sol6/src/yang/etsi-nfv.yang
+	yanger -f swagger -o nfv-swagger.json -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv.yang
+
