@@ -282,7 +282,7 @@ module etsi-nfv-common {
     leaf root {
       type uint64;
       units "Mbps";
-      mandatory true;
+      default 0;
       description
         "Specifies the throughput requirement of
          the link (e.g. bitrate of E-Line, root bitrate
