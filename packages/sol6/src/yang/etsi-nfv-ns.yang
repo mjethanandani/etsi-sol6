@@ -239,7 +239,6 @@ submodule etsi-nfv-ns {
         }
 
         leaf version {
-          // mandatory true;
           type string;
           description
             "Specifies the version of the VLD.";

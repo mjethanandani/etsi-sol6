@@ -82,7 +82,6 @@ submodule etsi-nfv-vnf {
            VirtualNetworkInterfaceRequirements information element";
       }
       leaf niclo-requirements {
-        //mandatory true;
         type string; // remove once leafref is resolved.
         //type leafref {
           // add path statement here to logical-node-data.
