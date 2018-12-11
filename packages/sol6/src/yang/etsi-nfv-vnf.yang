@@ -83,7 +83,6 @@ submodule etsi-nfv-vnf {
       }
 
       list niclo-requirements {
-        mandatory true;
 	key "id";
 	
 	leaf id {
