@@ -82,49 +82,19 @@ submodule etsi-nfv-vnf {
            VirtualNetworkInterfaceRequirements information element";
       }
 
-      list niclo-requirements {
-	key "id";
-	
-	leaf id {
-	  type string;
-	  description
-	    "Identifies this set of logical node requirements.";
-	  reference
-	    "GS NFV-IFA011: Section 7.1.9.6, LogicalNodeRequirements
-             information element";
+      leaf niclo-requirements {
+	type leafref {
+	  path "/nfv/vnfd/virtual-compute-descriptor/id";
 	}
-
-	list logical-node-requirement-detail {
-	  key "key";
-	  leaf key {
-	    type string;
-	  }
-	  leaf value {
-	    type string;
-	  }
-	  description
-	    "The logical node-level compute, memory and I/O
-             requirements. An array of key-value pairs that
-             articulate the deployment requirements. This could
-             include the number of CPU cores on this logical node, a
-             memory configuration specific to a logical node
-             (e.g. such as available in the Linux kernel via the
-             libnuma library) or a requirement related to the
-             association of an I/O device with the logical node.";
-	  reference
-	    "GS NFV-IFA011: Section 7.1.9.6, LogicalNodeRequirements
-             information element";
-	}
-	
-        description
-          "This identifier (couples) the CPD with any logical node I/O
-           requirements (for network devices) that may have been
-           created. Linking these attributes is necessary so that so
-           that I/O requirements that need to be articulated at the
+	description
+	  "This references (couples) the CPD with any logical node
+           I/O requirements (for network devices) that may have been
+           created. Linking these attributes is necessary so that
+           I/O requirements that need to be articulated at the
            logical node level can be associated with the network
            interface requirements associated with the CPD.";
-        reference
-          "GS NFV-IFA011: Section 7.1.6.6,
+	reference
+	  "GS NFV-IFA011: Section 7.1.6.6,
            VirtualNetworkInterfaceRequirements information element";
       }
     }
