@@ -12,17 +12,17 @@
       <int-cpd>
         <id>inside</id>
         <ext-cpd>inside</ext-cpd>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>management</id>
         <ext-cpd>management</ext-cpd>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>outside</id>
         <ext-cpd>outside</ext-cpd>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </int-cpd>
       <virtual-compute-desc>asa-vcd</virtual-compute-desc>
       <virtual-storage-desc>asa-vsd</virtual-storage-desc>
@@ -51,15 +51,15 @@
     </sw-image-desc>
     <ext-cpd>
       <id>inside</id>
-      <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      <layer-protocol>Ethernet</layer-protocol>
     </ext-cpd>
     <ext-cpd>
       <id>management</id>
-      <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      <layer-protocol>Ethernet</layer-protocol>
     </ext-cpd>
     <ext-cpd>
       <id>outside</id>
-      <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      <layer-protocol>Ethernet</layer-protocol>
     </ext-cpd>
     <df>
       <id>normal</id>
@@ -98,17 +98,17 @@
       <int-cpd>
         <id>left</id>
         <ext-cpd>left</ext-cpd>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>management</id>
         <ext-cpd>management</ext-cpd>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>right</id>
         <ext-cpd>right</ext-cpd>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </int-cpd>
       <virtual-compute-desc>csr-vcd</virtual-compute-desc>
       <virtual-storage-desc>csr-vsd</virtual-storage-desc>
@@ -137,15 +137,15 @@
     </sw-image-desc>
     <ext-cpd>
       <id>left</id>
-      <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      <layer-protocol>Ethernet</layer-protocol>
     </ext-cpd>
     <ext-cpd>
       <id>management</id>
-      <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      <layer-protocol>Ethernet</layer-protocol>
     </ext-cpd>
     <ext-cpd>
       <id>right</id>
-      <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      <layer-protocol>Ethernet</layer-protocol>
     </ext-cpd>
     <df>
       <id>normal</id>
@@ -225,7 +225,7 @@
       <id>fw2dpi</id>
       <version>1.0</version>
       <connectivity-type>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </connectivity-type>
       <df>
         <id>normal</id>
@@ -239,7 +239,7 @@
       <id>mgmt</id>
       <version>1.0</version>
       <connectivity-type>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:IPv4</layer-protocol>
+        <layer-protocol>IPv4</layer-protocol>
       </connectivity-type>
       <df>
         <id>normal</id>
@@ -253,7 +253,7 @@
       <id>r2fw</id>
       <version>1.0</version>
       <connectivity-type>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+        <layer-protocol>Ethernet</layer-protocol>
       </connectivity-type>
       <df>
         <id>normal</id>
@@ -447,7 +447,7 @@
       <id>r2fw</id>
       <version>1.0</version>
       <connectivity-type>
-        <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:IPv4</layer-protocol>
+        <layer-protocol>IPv4</layer-protocol>
       </connectivity-type>
       <df>
         <id>r2fw</id>
@@ -512,7 +512,7 @@
     <version>1.0</version>
     <ext-cpd>
       <id>outside</id>
-      <layer-protocol xmlns:common="urn:etsi:params:xml:ns:yang:etsi-nfv-common">common:Ethernet</layer-protocol>
+      <layer-protocol>Ethernet</layer-protocol>
     </ext-cpd>
   </pnfd>
 </nfv>
