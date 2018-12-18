@@ -6,9 +6,9 @@ include $(NCS_DIR)/src/ncs/build/include.ncs.mk
 
 SRC  = $(wildcard yang/*.yang)
 DIRS = ../load-dir
-FXS = $(DIRS)/etsi-nfv-common.fxs $(DIRS)/etsi-nfv.fxs
+FXS = $(DIRS)/etsi-nfv.fxs
 
-$(DIRS)/etsi-nfv.fxs: yang/etsi-nfv-vnf.yang  yang/etsi-nfv-pnf.yang yang/etsi-nfv-ns.yang
+$(DIRS)/etsi-nfv.fxs: yang/etsi-nfv-common.yang yang/etsi-nfv-vnf.yang  yang/etsi-nfv-pnf.yang yang/etsi-nfv-ns.yang
 
 YANGPATH += yang
 
