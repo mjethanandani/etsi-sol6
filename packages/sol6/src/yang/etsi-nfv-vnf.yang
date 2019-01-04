@@ -54,8 +54,8 @@ submodule etsi-nfv-vnf {
            VirtualNetworkInterfaceRequirements information element";
       }
       leaf support-mandatory {
-        mandatory true;
         type boolean;
+        default false;
         description
           "Indicates whether fulfilling the constraint is
            mandatory (true) for successful operation or desirable
@@ -118,9 +118,9 @@ submodule etsi-nfv-vnf {
 	"GS NFV IFA011: Section 7.1.6.3, Cpd information element.";
     }
     leaf layer-protocol {
-      mandatory true;
+      default Ethernet;
       type identityref {
-	base layer-protocol;
+        base layer-protocol;
       }
       description
 	"Identifies which protocol the CP uses for connectivity
@@ -714,7 +714,7 @@ submodule etsi-nfv-vnf {
               range "0..max";
             }
             units "Gb";
-            mandatory true;
+            default 1;
             description
               "Amount of virtual memory in MB.";
             reference
@@ -786,7 +786,7 @@ submodule etsi-nfv-vnf {
             type uint16 {
               range "1..max";
             }
-            mandatory true;
+            default 1;
             description
               "Number of virtual CPUs.";
             reference
@@ -879,7 +879,7 @@ submodule etsi-nfv-vnf {
             enum "swap";
             enum "ephemeral";
           }
-          mandatory true;
+          default root;
           description
             "Type of virtualised storage resource (e.g. volume,
              object).";
@@ -890,7 +890,7 @@ submodule etsi-nfv-vnf {
         leaf size-of-storage {
           type uint64;
           units "Gb";
-          mandatory true;
+          default 0;
           description
             "Size of virtualised storage resource (e.g. size of
              volume, in Gb)";
@@ -977,7 +977,7 @@ submodule etsi-nfv-vnf {
              information element.";
         }
         leaf container-format {
-          mandatory true;
+          default "bare";
           type enumeration {
             enum "aki" {
               description
@@ -1017,7 +1017,7 @@ submodule etsi-nfv-vnf {
              information element.";
         }
         leaf disk-format {
-          mandatory true;
+          default qcow2;
           type enumeration {
             enum "aki" {
               description
@@ -1115,7 +1115,7 @@ submodule etsi-nfv-vnf {
              information element.";
         }
         leaf image {
-          mandatory true;
+          default ".";
           type inet:uri;
           description
             "This is a reference to the actual software image.
@@ -1182,6 +1182,7 @@ submodule etsi-nfv-vnf {
                information element.";
           }
           container qos {
+            presence "VL QoS Parameters";
             description
               "QoS of the VL.";
             reference
@@ -1333,7 +1334,7 @@ submodule etsi-nfv-vnf {
           }
           leaf min-number-of-instances {
             type uint16;
-            mandatory true;
+            default 1;
             description
               "Minimum number of instances of the VNFC based on this
                VDU that is permitted to exist for this flavour.";
@@ -1343,7 +1344,7 @@ submodule etsi-nfv-vnf {
           }
           leaf max-number-of-instances {
             type uint16;
-            mandatory true;
+            default 1;
             must ". >= ../nfv:min-number-of-instances";
             reference
               "GS NFV IFA011: Section 7.1.8.3, VduProfile information
@@ -1504,7 +1505,7 @@ submodule etsi-nfv-vnf {
               must ". >= ../../../../nfv:df/" +
                    "nfv:vdu-profile[id=current()/../nfv:id]/" +
                    "nfv:min-number-of-instances";
-              mandatory true;
+              default 1;
               description
                 "Number of instances of VNFC based on this VDU to
                  deploy for this level.";
