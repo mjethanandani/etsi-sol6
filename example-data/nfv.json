@@ -16,18 +16,15 @@
               "int-cpd": [
                 {
                   "id": "inside",
-                  "ext-cpd": "inside",
-                  "layer-protocol": "Ethernet"
+                  "layer-protocol": "etsi-nfv:Ethernet"
                 },
                 {
                   "id": "management",
-                  "ext-cpd": "management",
-                  "layer-protocol": "Ethernet"
+                  "layer-protocol": "etsi-nfv:Ethernet"
                 },
                 {
                   "id": "outside",
-                  "ext-cpd": "outside",
-                  "layer-protocol": "Ethernet"
+                  "layer-protocol": "etsi-nfv:Ethernet"
                 }
               ],
               "virtual-compute-desc": "asa-vcd",
@@ -65,15 +62,27 @@
           "ext-cpd": [
             {
               "id": "inside",
-              "layer-protocol": "Ethernet"
+              "int-cpd": {
+                "vdu": "firewall",
+                "cpd": "inside"
+              },
+              "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "management",
-              "layer-protocol": "Ethernet"
+              "int-cpd": {
+                "vdu": "firewall",
+                "cpd": "management"
+              },
+              "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "outside",
-              "layer-protocol": "Ethernet"
+              "int-cpd": {
+                "vdu": "firewall",
+                "cpd": "outside"
+              },
+              "layer-protocol": "etsi-nfv:Ethernet"
             }
           ],
           "df": [
@@ -124,18 +133,15 @@
               "int-cpd": [
                 {
                   "id": "left",
-                  "ext-cpd": "left",
-                  "layer-protocol": "Ethernet"
+                  "layer-protocol": "etsi-nfv:Ethernet"
                 },
                 {
                   "id": "management",
-                  "ext-cpd": "management",
-                  "layer-protocol": "Ethernet"
+                  "layer-protocol": "etsi-nfv:Ethernet"
                 },
                 {
                   "id": "right",
-                  "ext-cpd": "right",
-                  "layer-protocol": "Ethernet"
+                  "layer-protocol": "etsi-nfv:Ethernet"
                 }
               ],
               "virtual-compute-desc": "csr-vcd",
@@ -173,15 +179,27 @@
           "ext-cpd": [
             {
               "id": "left",
-              "layer-protocol": "Ethernet"
+              "int-cpd": {
+                "vdu": "router",
+                "cpd": "left"
+              },
+              "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "management",
-              "layer-protocol": "Ethernet"
+              "int-cpd": {
+                "vdu": "router",
+                "cpd": "management"
+              },
+              "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "right",
-              "layer-protocol": "Ethernet"
+              "int-cpd": {
+                "vdu": "router",
+                "cpd": "right"
+              },
+              "layer-protocol": "etsi-nfv:Ethernet"
             }
           ],
           "df": [
