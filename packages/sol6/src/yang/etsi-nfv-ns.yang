@@ -107,9 +107,9 @@ submodule etsi-nfv-ns {
       }
 
       leaf-list pnfd-id {
-	type leafref {
-	  path "../../pnfd/id";
-	}
+        type leafref {
+          path "../../pnfd/id";
+        }
         description
           "References the PNFD of a constituent PNF.";
         reference
@@ -178,7 +178,7 @@ submodule etsi-nfv-ns {
           container pnf {
             leaf pnfd-id {
               mandatory true;
-                type leafref {
+              type leafref {
                 path "../../../../nfv:pnfd/nfv:id";
               }
               must "boolean(../pnfd-id[.=current()])";
@@ -193,12 +193,12 @@ submodule etsi-nfv-ns {
           }
           container ns {
             leaf nsd-id {
-            mandatory true;
+              mandatory true;
               type leafref {
                 path "../../../../nfv:nsd/nfv:id";
               }
               must "boolean(../nsd-id[.=current()])";
-	    }
+            }
 
             leaf ext-cpd-id {
               mandatory true;
@@ -249,6 +249,7 @@ submodule etsi-nfv-ns {
         uses connectivity-type;
 
         list df {
+          min-elements 1;
           key "id";
 
           description
@@ -1045,7 +1046,7 @@ submodule etsi-nfv-ns {
                information element";
           }
 
-          leaf affinity-type {
+          leaf affinity-or-anti-affinity {
             mandatory true;
             type affinity-type;
             description
@@ -1056,7 +1057,7 @@ submodule etsi-nfv-ns {
                information element";
           }
 
-          leaf affinity-scope {
+          leaf scope {
             mandatory true;
             type affinity-scope;
             description
@@ -1343,7 +1344,7 @@ submodule etsi-nfv-ns {
               type leafref {
                 path "deref(../../nsd-id)/../sapd/id";
               }
-	      description
+              description
                 "References the descriptor of a connection point on a
                  VNF/PNF or a SAP which connects to virtual links
                  instantiated from the profile identified in the
@@ -1351,7 +1352,7 @@ submodule etsi-nfv-ns {
               reference
                 "GS NFV IFA014: Section 6.3.7.2, NsVirutalLinkConnectivity
                  information element.";
-	    }
+            }
             description
               "Defines the connection information of the NS, it
                contains connection relationship between an NS SAP and
@@ -1481,7 +1482,7 @@ submodule etsi-nfv-ns {
                  information element";
             }
           }
-	}
+        }
       }
       uses security-parameters;
     }

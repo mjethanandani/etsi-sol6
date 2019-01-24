@@ -32,7 +32,7 @@
               "sw-image-desc": "asa-image"
             }
           ],
-          "virtual-compute-descriptor": [
+          "virtual-compute-desc": [
             {
               "id": "asa-vcd",
               "virtual-memory": {
@@ -43,7 +43,7 @@
               }
             }
           ],
-          "virtual-storage-descriptor": [
+          "virtual-storage-desc": [
             {
               "id": "asa-vsd",
               "type-of-storage": "root",
@@ -149,7 +149,7 @@
               "sw-image-desc": "csr-image"
             }
           ],
-          "virtual-compute-descriptor": [
+          "virtual-compute-desc": [
             {
               "id": "csr-vcd",
               "virtual-memory": {
@@ -160,7 +160,7 @@
               }
             }
           ],
-          "virtual-storage-descriptor": [
+          "virtual-storage-desc": [
             {
               "id": "csr-vsd",
               "type-of-storage": "root",

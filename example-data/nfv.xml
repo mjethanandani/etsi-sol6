@@ -25,7 +25,7 @@
       <virtual-storage-desc>asa-vsd</virtual-storage-desc>
       <sw-image-desc>asa-image</sw-image-desc>
     </vdu>
-    <virtual-compute-descriptor>
+    <virtual-compute-desc>
       <id>asa-vcd</id>
       <virtual-memory>
         <size>4.0</size>
@@ -33,12 +33,12 @@
       <virtual-cpu>
         <num-virtual-cpu>2</num-virtual-cpu>
       </virtual-cpu>
-    </virtual-compute-descriptor>
-    <virtual-storage-descriptor>
+    </virtual-compute-desc>
+    <virtual-storage-desc>
       <id>asa-vsd</id>
       <type-of-storage>root</type-of-storage>
       <size-of-storage>0</size-of-storage>
-    </virtual-storage-descriptor>
+    </virtual-storage-desc>
     <sw-image-desc>
       <id>asa-image</id>
       <container-format>bare</container-format>
@@ -120,7 +120,7 @@
       <virtual-storage-desc>csr-vsd</virtual-storage-desc>
       <sw-image-desc>csr-image</sw-image-desc>
     </vdu>
-    <virtual-compute-descriptor>
+    <virtual-compute-desc>
       <id>csr-vcd</id>
       <virtual-memory>
         <size>4.0</size>
@@ -128,12 +128,12 @@
       <virtual-cpu>
         <num-virtual-cpu>2</num-virtual-cpu>
       </virtual-cpu>
-    </virtual-compute-descriptor>
-    <virtual-storage-descriptor>
+    </virtual-compute-desc>
+    <virtual-storage-desc>
       <id>csr-vsd</id>
       <type-of-storage>root</type-of-storage>
       <size-of-storage>0</size-of-storage>
-    </virtual-storage-descriptor>
+    </virtual-storage-desc>
     <sw-image-desc>
       <id>csr-image</id>
       <container-format>bare</container-format>
