@@ -1374,10 +1374,7 @@ submodule etsi-nfv-vnf {
                  information element.";
             }
             leaf type {
-              type enumeration {
-                enum affinity;
-                enum anti-affinity;
-              }
+              type affinity-type;
               description
                 "Specifies whether the rule is an affinity rule or an
                  anti-affinity rule.";

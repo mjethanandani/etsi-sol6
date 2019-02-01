@@ -1046,7 +1046,7 @@ submodule etsi-nfv-ns {
                information element";
           }
 
-          leaf affinity-or-anti-affinity {
+          leaf type {
             mandatory true;
             type affinity-type;
             description
