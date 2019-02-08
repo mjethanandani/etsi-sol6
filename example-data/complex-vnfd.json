@@ -1,0 +1,308 @@
+{
+  "data": {
+    "etsi-nfv:nfv": {
+      "vnfd": [
+        {
+          "id": "complex-vnf",
+          "provider": "ACME",
+          "product-name": "complex-vnf",
+          "software-version": "1.0",
+          "version": "1.0",
+          "vnfm-info": ["netconf"],
+          "vdu": [
+            {
+              "id": "control-plane-active",
+              "name": "control-plane-active",
+              "int-cpd": [
+                {
+                  "id": "internal",
+                  "int-virtual-link-desc": "internal-vl",
+                  "layer-protocol": "etsi-nfv:IPv4"
+                },
+                {
+                  "id": "mgmt",
+                  "int-virtual-link-desc": "mgmt",
+                  "layer-protocol": "etsi-nfv:IPv4"
+                }
+              ],
+              "virtual-compute-desc": "CP",
+              "virtual-storage-desc": ["root"],
+              "sw-image-desc": "CP"
+            },
+            {
+              "id": "control-plane-standby",
+              "name": "control-plane-standby",
+              "int-cpd": [
+                {
+                  "id": "internal",
+                  "int-virtual-link-desc": "internal-vl",
+                  "layer-protocol": "etsi-nfv:IPv4"
+                },
+                {
+                  "id": "mgmt",
+                  "int-virtual-link-desc": "mgmt",
+                  "layer-protocol": "etsi-nfv:IPv4"
+                }
+              ],
+              "virtual-compute-desc": "CP",
+              "virtual-storage-desc": ["root"],
+              "sw-image-desc": "CP"
+            },
+            {
+              "id": "data-plane",
+              "name": "data-plane",
+              "int-cpd": [
+                {
+                  "id": "in",
+                  "layer-protocol": "etsi-nfv:IPv4"
+                },
+                {
+                  "id": "internal",
+                  "int-virtual-link-desc": "internal-vl",
+                  "layer-protocol": "etsi-nfv:IPv4"
+                },
+                {
+                  "id": "out",
+                  "layer-protocol": "etsi-nfv:IPv4"
+                }
+              ],
+              "virtual-compute-desc": "DP",
+              "virtual-storage-desc": ["root"],
+              "sw-image-desc": "DP"
+            }
+          ],
+          "virtual-compute-desc": [
+            {
+              "id": "CP",
+              "virtual-memory": {
+                "size": "16.0"
+              },
+              "virtual-cpu": {
+                "num-virtual-cpu": 8
+              }
+            },
+            {
+              "id": "DP",
+              "virtual-memory": {
+                "size": "32.0"
+              },
+              "virtual-cpu": {
+                "num-virtual-cpu": 16
+              }
+            }
+          ],
+          "virtual-storage-desc": [
+            {
+              "id": "root",
+              "type-of-storage": "root",
+              "size-of-storage": "10"
+            }
+          ],
+          "sw-image-desc": [
+            {
+              "id": "CP",
+              "name": "CP",
+              "container-format": "bare",
+              "disk-format": "qcow2",
+              "image": "http://acme.images.com/control-plane.qcow2"
+            },
+            {
+              "id": "DP",
+              "name": "DP",
+              "container-format": "bare",
+              "disk-format": "qcow2",
+              "image": "http://acme.images.com/data-plane.qcow2"
+            }
+          ],
+          "int-virtual-link-desc": [
+            {
+              "id": "internal-vl",
+              "connectivity-type": {
+                "layer-protocol": "etsi-nfv:IPv4"
+              }
+            },
+            {
+              "id": "mgmt",
+              "connectivity-type": {
+                "layer-protocol": "etsi-nfv:IPv4"
+              }
+            }
+          ],
+          "ext-cpd": [
+            {
+              "id": "in",
+              "int-cpd": {
+                "vdu": "data-plane",
+                "cpd": "in"
+              },
+              "layer-protocol": "etsi-nfv:IPv4"
+            },
+            {
+              "id": "mgmt",
+              "int-virtual-link-desc": "mgmt",
+              "layer-protocol": "etsi-nfv:IPv4"
+            },
+            {
+              "id": "out",
+              "int-cpd": {
+                "vdu": "data-plane",
+                "cpd": "out"
+              },
+              "layer-protocol": "etsi-nfv:IPv4"
+            }
+          ],
+          "df": [
+            {
+              "id": "gold",
+              "vdu-profile": [
+                {
+                  "id": "control-plane-active",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "affinity-or-anti-affinity-group": [
+                    {
+                      "id": "control-plane"
+                    }
+                  ]
+                },
+                {
+                  "id": "control-plane-standby",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "affinity-or-anti-affinity-group": [
+                    {
+                      "id": "control-plane"
+                    }
+                  ]
+                },
+                {
+                  "id": "data-plane",
+                  "min-number-of-instances": 2,
+                  "max-number-of-instances": 8
+                }
+              ],
+              "instantiation-level": [
+                {
+                  "id": "il-1",
+                  "vdu-level": [
+                    {
+                      "id": "control-plane-active",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "control-plane-standby",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "data-plane",
+                      "number-of-instances": 2
+                    }
+                  ]
+                },
+                {
+                  "id": "il-2",
+                  "vdu-level": [
+                    {
+                      "id": "control-plane-active",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "control-plane-standby",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "data-plane",
+                      "number-of-instances": 4
+                    }
+                  ]
+                }
+              ],
+              "default-instantiation-level": "il-1",
+              "affinity-or-anti-affinity-group": [
+                {
+                  "id": "control-plane",
+                  "type": "anti-affinity",
+                  "scope": "nfvi-node"
+                }
+              ]
+            },
+            {
+              "id": "silver",
+              "vdu-profile": [
+                {
+                  "id": "control-plane-active",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "affinity-or-anti-affinity-group": [
+                    {
+                      "id": "control-plane"
+                    }
+                  ]
+                },
+                {
+                  "id": "control-plane-standby",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 1,
+                  "affinity-or-anti-affinity-group": [
+                    {
+                      "id": "control-plane"
+                    }
+                  ]
+                },
+                {
+                  "id": "data-plane",
+                  "min-number-of-instances": 1,
+                  "max-number-of-instances": 4
+                }
+              ],
+              "instantiation-level": [
+                {
+                  "id": "il-1",
+                  "vdu-level": [
+                    {
+                      "id": "control-plane-active",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "control-plane-standby",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "data-plane",
+                      "number-of-instances": 1
+                    }
+                  ]
+                },
+                {
+                  "id": "il-2",
+                  "vdu-level": [
+                    {
+                      "id": "control-plane-active",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "control-plane-standby",
+                      "number-of-instances": 1
+                    },
+                    {
+                      "id": "data-plane",
+                      "number-of-instances": 2
+                    }
+                  ]
+                }
+              ],
+              "default-instantiation-level": "il-1",
+              "affinity-or-anti-affinity-group": [
+                {
+                  "id": "control-plane",
+                  "type": "anti-affinity",
+                  "scope": "nfvi-node"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
