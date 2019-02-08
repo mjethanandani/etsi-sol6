@@ -1664,16 +1664,23 @@ submodule etsi-nfv-vnf {
               "GS NFV IFA011: Section 7.1.5.2
                VnfLcmOperationsConfiguration information element";
 
-            leaf parameter {
-              type string;
+            list parameter {
+              key "key";
+              leaf key {
+                type string;
+              }
+              leaf value {
+                type string;
+              }
               description
                 "VNF-specific parameter to be passed when invoking
-                 the HealVnf operation.";
+                 the ScaleVnfToLevel operation.";
               reference
-                "GS NFV IFA011: Section 7.1.5.6 HealVnfOpConfig
-                 information element";
+                "GS NFV IFA011: Section 7.1.5.6
+                 ScaleVnfToLevelOpConfig information element";
             }
-            leaf cause {
+
+            leaf-list cause {
               type string;
               description
                 "Supported 'cause' parameter values.";
