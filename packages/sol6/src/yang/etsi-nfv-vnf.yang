@@ -1673,11 +1673,11 @@ submodule etsi-nfv-vnf {
                 type string;
               }
               description
-                "VNF-specific parameter to be passed when invoking
-                 the ScaleVnfToLevel operation.";
+                "VNF-specific key/value parameter to be passed when invoking
+                 the HealVnf operation.";
               reference
                 "GS NFV IFA011: Section 7.1.5.6
-                 ScaleVnfToLevelOpConfig information element";
+                 HealVnfOpConfig information element";
             }
 
             leaf-list cause {
