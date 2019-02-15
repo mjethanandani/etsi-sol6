@@ -147,18 +147,17 @@ submodule etsi-nfv-ns {
             "GS NFV IFA014: Section 6.2.3.2 Sapd information element";
         }
 
-        leaf virtual-link-desc {
-          type leafref {
-            path "../../virtual-link-desc/id";
-          }
-          description
-            "References the descriptor of the NS VL instance to
+        choice associated-vl-or-cpd-id {
+          leaf virtual-link-desc {
+            type leafref {
+              path "../../virtual-link-desc/id";
+            }
+            description
+              "References the descriptor of the NS VL instance to
              which the SAP instantiated from this SAPD connects to.";
-          reference
-            "GS NFV IFA014: Section 6.2.3.2 Sapd information element";
-        }
-
-        choice associated-cpd-id {
+            reference
+              "GS NFV IFA014: Section 6.2.3.2 Sapd information element";
+          }
           container vnf {
             leaf vnfd-id {
               mandatory true;
