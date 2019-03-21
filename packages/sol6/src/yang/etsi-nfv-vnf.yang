@@ -941,6 +941,7 @@ submodule etsi-nfv-vnf {
              information element";
         }
         leaf name {
+          mandatory true;
           type string;
           description
             "The name of this software image.";
@@ -949,6 +950,8 @@ submodule etsi-nfv-vnf {
              information element.";
         }
         leaf version {
+
+          mandatory true;
           type string;
           description
             "The version of this software image.";
@@ -957,6 +960,7 @@ submodule etsi-nfv-vnf {
              information element.";
         }
         leaf checksum {
+          mandatory true;
           type string;
           description
             "The checksum of the software image file.";
@@ -1094,6 +1098,7 @@ submodule etsi-nfv-vnf {
              information element.";
         }
         leaf size {
+          mandatory true;
           type uint64;
           units "Gb";
           description
