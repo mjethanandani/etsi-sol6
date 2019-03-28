@@ -102,15 +102,21 @@
             {
               "id": "CP",
               "name": "CP",
+              "version": "1.0",
+              "checksum": "123231",
               "container-format": "bare",
               "disk-format": "qcow2",
+              "size": "1",
               "image": "http://acme.images.com/control-plane.qcow2"
             },
             {
               "id": "DP",
               "name": "DP",
+              "version": "1.0",
+              "checksum": "123231",
               "container-format": "bare",
               "disk-format": "qcow2",
+              "size": "1",
               "image": "http://acme.images.com/data-plane.qcow2"
             }
           ],
@@ -131,9 +137,9 @@
           "ext-cpd": [
             {
               "id": "in",
-              "int-cpd": {
-                "vdu": "data-plane",
-                "cpd": "in"
+              "vdu": {
+                "vdu-id": "data-plane",
+                "int-cpd-id": "in"
               },
               "layer-protocol": "etsi-nfv:IPv4"
             },
@@ -144,9 +150,9 @@
             },
             {
               "id": "out",
-              "int-cpd": {
-                "vdu": "data-plane",
-                "cpd": "out"
+              "vdu": {
+                "vdu-id": "data-plane",
+                "int-cpd-id": "out"
               },
               "layer-protocol": "etsi-nfv:IPv4"
             }

@@ -53,34 +53,38 @@
           "sw-image-desc": [
             {
               "id": "asa-image",
+              "name": "asa1.0",
+              "version": "1.0",
+              "checksum": "123321",
               "container-format": "bare",
               "disk-format": "qcow2",
               "min-ram": "2.0",
+              "size": "2",
               "image": "http://www.cisco.com/asa.qcow2"
             }
           ],
           "ext-cpd": [
             {
               "id": "inside",
-              "int-cpd": {
-                "vdu": "firewall",
-                "cpd": "inside"
+              "vdu": {
+                "vdu-id": "firewall",
+                "int-cpd-id": "inside"
               },
               "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "management",
-              "int-cpd": {
-                "vdu": "firewall",
-                "cpd": "management"
+              "vdu": {
+                "vdu-id": "firewall",
+                "int-cpd-id": "management"
               },
               "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "outside",
-              "int-cpd": {
-                "vdu": "firewall",
-                "cpd": "outside"
+              "vdu": {
+                "vdu-id": "firewall",
+                "int-cpd-id": "outside"
               },
               "layer-protocol": "etsi-nfv:Ethernet"
             }
@@ -170,34 +174,38 @@
           "sw-image-desc": [
             {
               "id": "csr-image",
+              "name": "csr2.1",
+              "version": "2.1",
+              "checksum": "123321",
               "container-format": "bare",
               "disk-format": "qcow2",
               "min-ram": "2.0",
+              "size": "2",
               "image": "http://www.cisco.com/csr.qcow2"
             }
           ],
           "ext-cpd": [
             {
               "id": "left",
-              "int-cpd": {
-                "vdu": "router",
-                "cpd": "left"
+              "vdu": {
+                "vdu-id": "router",
+                "int-cpd-id": "left"
               },
               "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "management",
-              "int-cpd": {
-                "vdu": "router",
-                "cpd": "management"
+              "vdu": {
+                "vdu-id": "router",
+                "int-cpd-id": "management"
               },
               "layer-protocol": "etsi-nfv:Ethernet"
             },
             {
               "id": "right",
-              "int-cpd": {
-                "vdu": "router",
-                "cpd": "right"
+              "vdu": {
+                "vdu-id": "router",
+                "int-cpd-id": "right"
               },
               "layer-protocol": "etsi-nfv:Ethernet"
             }
@@ -304,7 +312,7 @@
               "id": "fw2dpi",
               "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "Ethernet"
+                "layer-protocol": "etsi-nfv:Ethernet"
               },
               "df": [
                 {
@@ -320,7 +328,7 @@
               "id": "mgmt",
               "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "IPv4"
+                "layer-protocol": "etsi-nfv:IPv4"
               },
               "df": [
                 {
@@ -336,7 +344,7 @@
               "id": "r2fw",
               "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "Ethernet"
+                "layer-protocol": "etsi-nfv:Ethernet"
               },
               "df": [
                 {
@@ -566,7 +574,7 @@
               "id": "r2fw",
               "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "IPv4"
+                "layer-protocol": "etsi-nfv:IPv4"
               },
               "df": [
                 {
@@ -655,7 +663,7 @@
           "ext-cpd": [
             {
               "id": "outside",
-              "layer-protocol": "Ethernet"
+              "layer-protocol": "etsi-nfv:Ethernet"
             }
           ]
         }
