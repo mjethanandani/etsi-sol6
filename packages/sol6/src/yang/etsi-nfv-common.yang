@@ -640,7 +640,7 @@ module etsi-nfv-common {
 
     leaf security-group-rule-id {
       type leafref {
-        path "/nfv/vnfd/security-group-rule/id";
+        path "../../../security-group-rule/id";
       }
       description
         "Reference of the security group rules bound to this
