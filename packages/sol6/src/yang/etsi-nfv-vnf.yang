@@ -86,22 +86,6 @@ module etsi-nfv-vnf {
           "GS NFV-IFA011: Section 7.1.6.6,
            VirtualNetworkInterfaceRequirements information element";
       }
-
-      leaf nicio-requirements {
-        type leafref {
-          path "../../../virtual-compute-desc/id";
-        }
-        description
-          "This references (couples) the CPD with any logical node I/O
-           requirements (for network devices) that may have been
-           created. Linking these attributes is necessary so that so
-           that I/O requirements that need to be articulated at the
-           logical node level can be associated with the network
-           interface requirements associated with the CPD.";
-        reference
-          "GS NFV-IFA011: Section 7.1.6.6,
-           VirtualNetworkInterfaceRequirements information element";
-      }
     }
   }
 
@@ -259,6 +243,21 @@ module etsi-nfv-vnf {
                element.";
 	}
 	uses virtual-network-interface-requirements;
+        leaf nicio-requirements {
+          type leafref {
+            path "../../../virtual-compute-desc/id";
+          }
+          description
+            "This references (couples) the CPD with any logical node I/O
+           requirements (for network devices) that may have been
+           created. Linking these attributes is necessary so that so
+           that I/O requirements that need to be articulated at the
+           logical node level can be associated with the network
+           interface requirements associated with the CPD.";
+          reference
+            "GS NFV-IFA011: Section 7.1.6.6,
+           VirtualNetworkInterfaceRequirements information element";
+        }
 	leaf-list order {
 	  type uint32;
 	  description
@@ -279,6 +278,16 @@ module etsi-nfv-vnf {
                element.";
 	}
 	uses cmn:cpd;
+        leaf security-group-rule-id {
+          type leafref {
+            path "../../../security-group-rule/id";
+          }
+          description
+            "Reference of the security group rules bound to this
+         CPD.";
+          reference
+            "GS NFV IFA011: Section 7.1.6.3 Cpd information element";
+        }
       }
       leaf virtual-compute-desc {
 	type leafref {
@@ -1176,7 +1185,32 @@ module etsi-nfv-vnf {
 	}
       }
       uses virtual-network-interface-requirements;
+      leaf nicio-requirements {
+        type leafref {
+          path "../../virtual-compute-desc/id";
+        }
+        description
+          "This references (couples) the CPD with any logical node I/O
+           requirements (for network devices) that may have been
+           created. Linking these attributes is necessary so that so
+           that I/O requirements that need to be articulated at the
+           logical node level can be associated with the network
+           interface requirements associated with the CPD.";
+        reference
+          "GS NFV-IFA011: Section 7.1.6.6,
+           VirtualNetworkInterfaceRequirements information element";
+      }
       uses cmn:cpd;
+      leaf security-group-rule-id {
+        type leafref {
+          path "../../security-group-rule/id";
+        }
+        description
+          "Reference of the security group rules bound to this
+         CPD.";
+        reference
+          "GS NFV IFA011: Section 7.1.6.3 Cpd information element";
+      }
     }
 
     list df {
@@ -2655,4 +2689,3 @@ module etsi-nfv-vnf {
     }
   }
 }
-

@@ -6,8 +6,10 @@ include $(NCS_DIR)/src/ncs/build/include.ncs.mk
 
 SRC  = $(wildcard yang/*.yang)
 DIRS = ../load-dir
-FXS = $(DIRS)/etsi-nfv-pkg.fxs $(DIRS)/etsi-nfv-descriptors.fxs
+FXS = $(DIRS)/etsi-nfv-pkg.fxs $(DIRS)/etsi-nfv-descriptors.fxs $(DIRS)/etsi-nfv-common.fxs $(DIRS)/etsi-nfv-vnf.fxs
 
+$(DIRS)/etsi-nfv-common.fxs:
+$(DIRS)/etsi-nfv-vnf.fxs: yang/etsi-nfv-common.yang
 $(DIRS)/etsi-nfv-pkg.fxs: yang/etsi-nfv-common.yang yang/etsi-nfv-vnf.yang
 $(DIRS)/etsi-nfv-descriptors.fxs: yang/etsi-nfv-common.yang yang/etsi-nfv-vnf.yang yang/etsi-nfv-pnf.yang yang/etsi-nfv-ns.yang
 
