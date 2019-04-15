@@ -3,13 +3,9 @@ module etsi-nfv-descriptors {
   namespace "urn:etsi:nfv:yang:etsi-nfv-descriptors";
   prefix nfv;
 
-  import etsi-nfv-vnf {
-    prefix vnf;
-    reference
-      "ETSI GS NFV-IFA 011 Ed261v254.";
-  }
-  
+  include etsi-nfv-common;
   include etsi-nfv-ns;
+  include etsi-nfv-vnf;
   include etsi-nfv-pnf;
 
   organization
@@ -36,10 +32,13 @@ module etsi-nfv-descriptors {
       reference
         "GS NFV-IFA011: Section 7.1.2, VNFD information element";
 
-      uses vnf:vnfd;
+      uses vnfd;
     }
 
     uses nsd;
     uses pnfd;
+    container pkg {
+      uses vnfd;
+    }
   }
 }

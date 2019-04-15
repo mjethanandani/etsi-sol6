@@ -1,11 +1,11 @@
-module etsi-nfv-vnf {
+submodule etsi-nfv-vnf {
   yang-version 1.1;
-  namespace "urn:etsi:nfv:yang:etsi-nfv-vnf";
-  prefix vnf;
-
-  import etsi-nfv-common {
-    prefix cmn;
+  belongs-to etsi-nfv-descriptors {
+    prefix nfv;
   }
+
+  include etsi-nfv-common;
+
   import ietf-inet-types {
     prefix inet;
   }
@@ -82,22 +82,6 @@ module etsi-nfv-vnf {
           "The network interface requirements. An element from an
            array of key-value pairs that articulate the network
            interface deployment requirements.";
-        reference
-          "GS NFV-IFA011: Section 7.1.6.6,
-           VirtualNetworkInterfaceRequirements information element";
-      }
-
-      leaf nicio-requirements {
-        type leafref {
-          path "../../../virtual-compute-desc/id";
-        }
-        description
-          "This references (couples) the CPD with any logical node I/O
-           requirements (for network devices) that may have been
-           created. Linking these attributes is necessary so that so
-           that I/O requirements that need to be articulated at the
-           logical node level can be associated with the network
-           interface requirements associated with the CPD.";
         reference
           "GS NFV-IFA011: Section 7.1.6.6,
            VirtualNetworkInterfaceRequirements information element";
@@ -259,6 +243,21 @@ module etsi-nfv-vnf {
                element.";
 	}
 	uses virtual-network-interface-requirements;
+        leaf nicio-requirements {
+          type leafref {
+            path "../../../virtual-compute-desc/id";
+          }
+          description
+            "This references (couples) the CPD with any logical node I/O
+           requirements (for network devices) that may have been
+           created. Linking these attributes is necessary so that so
+           that I/O requirements that need to be articulated at the
+           logical node level can be associated with the network
+           interface requirements associated with the CPD.";
+          reference
+            "GS NFV-IFA011: Section 7.1.6.6,
+           VirtualNetworkInterfaceRequirements information element";
+        }
 	leaf-list order {
 	  type uint32;
 	  description
@@ -278,7 +277,17 @@ module etsi-nfv-vnf {
 	    "GS NFV IFA011: Section 7.1.6.4, VduCpd information
                element.";
 	}
-	uses cmn:cpd;
+	uses cpd;
+        leaf security-group-rule-id {
+          type leafref {
+            path "../../../security-group-rule/id";
+          }
+          description
+            "Reference of the security group rules bound to this
+         CPD.";
+          reference
+            "GS NFV IFA011: Section 7.1.6.3 Cpd information element";
+        }
       }
       leaf virtual-compute-desc {
 	type leafref {
@@ -368,7 +377,7 @@ module etsi-nfv-vnf {
 	    "GS NFV IFA011: Section 7.1.11.3, MonitoringParameter
                information element.";
 	}
-	uses cmn:monitoring-parameter;
+	uses monitoring-parameter;
       }
       list configurable-properties {
 	key "key";
@@ -718,9 +727,9 @@ module etsi-nfv-vnf {
 
       leaf type-of-storage {
 	// Needed to be able to onboard images
-	default cmn:root-storage;
+	default root-storage;
 	type identityref {
-	  base cmn:storage-type;
+	  base storage-type;
 	}
 	description
 	  "Type of virtualised storage resource (e.g. volume,
@@ -819,7 +828,7 @@ module etsi-nfv-vnf {
 	leaf algorithm {
 	  mandatory true;
 	  type identityref {
-	    base cmn:checksum-algorithm;
+	    base checksum-algorithm;
 	  }
 	  description
 	    "Species the algorithm used to obtain the checksum
@@ -1104,7 +1113,7 @@ module etsi-nfv-vnf {
 	}
       }
 
-      uses cmn:connectivity-type;
+      uses connectivity-type;
 
       leaf-list test-access {
 	type string;
@@ -1135,11 +1144,11 @@ module etsi-nfv-vnf {
             "GS NFV IFA011: Section 7.1.11.3, MonitoringParameter
              information element.";
 	}
-	uses cmn:monitoring-parameter;
+	uses monitoring-parameter;
       }
     }
 
-    uses cmn:security-group-rule;
+    uses security-group-rule;
 
     list ext-cpd {
       key "id";
@@ -1176,7 +1185,33 @@ module etsi-nfv-vnf {
 	}
       }
       uses virtual-network-interface-requirements;
-      uses cmn:cpd;
+      leaf nicio-requirements {
+        type leafref {
+          path "../../virtual-compute-desc/id";
+        }
+        description
+          "This references (couples) the CPD with any logical node I/O
+           requirements (for network devices) that may have been
+           created. Linking these attributes is necessary so that so
+           that I/O requirements that need to be articulated at the
+           logical node level can be associated with the network
+           interface requirements associated with the CPD.";
+        reference
+          "GS NFV-IFA011: Section 7.1.6.6,
+           VirtualNetworkInterfaceRequirements information element";
+      }
+
+      uses cpd;
+      leaf security-group-rule-id {
+        type leafref {
+          path "../../security-group-rule/id";
+        }
+        description
+          "Reference of the security group rules bound to this
+         CPD.";
+        reference
+          "GS NFV IFA011: Section 7.1.6.3 Cpd information element";
+      }
     }
 
     list df {
@@ -1240,7 +1275,7 @@ module etsi-nfv-vnf {
 	    "GS NFV IFA011: Section 7.1.8.3, VduProfile information
                element.";
 	}
-	uses cmn:local-affinity-or-anti-affinity-rule;
+	uses local-affinity-or-anti-affinity-rule;
 
 	list affinity-or-anti-affinity-group {
 	  key "id";
@@ -1298,7 +1333,7 @@ module etsi-nfv-vnf {
 	    "GS NFV IFA011: Section 7.1.8.4, VirtualLinkProfile
                information element.";
 	}
-	uses cmn:local-affinity-or-anti-affinity-rule;
+	uses local-affinity-or-anti-affinity-rule;
 
 	list affinity-or-anti-affinity-group {
 	  key "id";
@@ -1382,7 +1417,7 @@ module etsi-nfv-vnf {
 	container virtual-link-protocol-data {
 	  leaf associated-layer-protocol {
 	    type identityref {
-	      base cmn:layer-protocol;
+	      base layer-protocol;
 	    }
 	    description
 	      "One of the values of the attribute layerProtocol of
@@ -1676,7 +1711,7 @@ module etsi-nfv-vnf {
       }
       leaf-list supported-operation {
 	type identityref {
-	  base cmn:supported-operation;
+	  base supported-operation;
 	}
 	description
 	  "Indicates which operations are available for this DF via
@@ -2022,7 +2057,7 @@ module etsi-nfv-vnf {
 
 	leaf type {
 	  mandatory true;
-	  type cmn:affinity-type;
+	  type affinity-type;
 	  description
 	    "Specifies whether the rule is an affinity rule or an
                anti-affinity rule.";
@@ -2033,7 +2068,7 @@ module etsi-nfv-vnf {
 
 	leaf scope {
 	  mandatory true;
-	  type cmn:affinity-scope;
+	  type affinity-scope;
 	  description
 	    "Specifies the scope of the rule, possible values are
                'NFVI-PoP', 'Zone', 'ZoneGroup', 'NFVI-node'.";
@@ -2172,7 +2207,7 @@ module etsi-nfv-vnf {
 	    "GS NFV IFA011: Section 7.1.11.3 MonitoringParameter
                information element";
 	}
-	uses cmn:monitoring-parameter;
+	uses monitoring-parameter;
       }
 
       list scaling-aspect {
@@ -2485,7 +2520,7 @@ module etsi-nfv-vnf {
       }
 
       leaf-list event {
-	type cmn:internal-lifecycle-management-script-event;
+	type internal-lifecycle-management-script-event;
 	description
 	  "Describes VNF lifecycle event(s) or an external stimulus
              detected on a VNFM reference point.";
@@ -2655,4 +2690,3 @@ module etsi-nfv-vnf {
     }
   }
 }
-

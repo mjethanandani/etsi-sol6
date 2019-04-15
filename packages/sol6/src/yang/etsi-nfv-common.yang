@@ -1,8 +1,8 @@
-module etsi-nfv-common {
+submodule etsi-nfv-common {
   yang-version 1.1;
-  namespace "urn:etsi:nfv:yang:etsi-nfv-common";
-  prefix cmn;
-
+  belongs-to etsi-nfv-descriptors {
+    prefix nfv;
+  }
   organization
     "European Telecommunications Standards Institute (ETSI)";
 
@@ -242,7 +242,7 @@ module etsi-nfv-common {
     description
       "Ephemeral type of storage.";
   }
-  
+
   /*
    * Typedefs
    */
@@ -634,17 +634,6 @@ module etsi-nfv-common {
          several VLANs. A cardinality of 0 implies that trunkMode
          is not configured for the Cp i.e. It is equivalent to
          Boolean value 'false'.";
-      reference
-        "GS NFV IFA011: Section 7.1.6.3 Cpd information element";
-    }
-
-    leaf security-group-rule-id {
-      type leafref {
-        path "../../../security-group-rule/id";
-      }
-      description
-        "Reference of the security group rules bound to this
-         CPD.";
       reference
         "GS NFV IFA011: Section 7.1.6.3 Cpd information element";
     }
