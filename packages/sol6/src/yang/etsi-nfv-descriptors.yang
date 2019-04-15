@@ -37,8 +37,5 @@ module etsi-nfv-descriptors {
 
     uses nsd;
     uses pnfd;
-    container pkg {
-      uses vnfd;
-    }
   }
 }
