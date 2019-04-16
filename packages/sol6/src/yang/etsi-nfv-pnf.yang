@@ -1,26 +1,28 @@
 submodule etsi-nfv-pnf {
   yang-version 1.1;
-  belongs-to etsi-nfv {
+  belongs-to etsi-nfv-descriptors {
     prefix nfv;
   }
 
   /*
    * Import
    */
-  include etsi-nfv-common;
+  import etsi-nfv-common {
+    prefix cmn;
+  }
 
   description
     "Models for PNFD according to GS NFV-IFA 014.";
 
-  revision 2018-06-25 {
+  revision 2019-03-18 {
     description
       "Initial revision.
 
        Common data structure to support VNFD according to:
-       ETSI GS NFV-IFA 014 Ed251v244";
+       ETSI GS NFV-IFA 014 Ed261v252";
 
     reference
-      "ETSI GS NFV-IFA 014 Ed251v244";
+      "ETSI GS NFV-IFA 014 Ed261v252";
   }
 
   grouping pnfd {
@@ -81,7 +83,7 @@ submodule etsi-nfv-pnf {
       }
       list ext-cpd {
         key "id";
-        uses cpd;
+        uses cmn:cpd;
         description
           "Specifies the characteristics of one or more connection
            points where to connect the PNF to a VL.";
@@ -90,7 +92,7 @@ submodule etsi-nfv-pnf {
       }
       list security {
         key "signature";
-        uses security-parameters;
+        uses cmn:security-parameters;
         description
           "Provides a signature to prevent tampering.
            Editor's Note: While IFA014 does specify that the PNFD
@@ -111,6 +113,7 @@ submodule etsi-nfv-pnf {
         reference
           "GS NFV-IFA014: Section 6.6.2, Pnfd information element";
       }
+      uses cmn:security-group-rule;
     }
   }
 }

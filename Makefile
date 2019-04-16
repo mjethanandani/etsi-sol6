@@ -67,10 +67,16 @@ container-test:
 	docker run --rm -it etsi-test
 
 etsi-nfv-swagger.json: packages/sol6/src/yang/*.yang
-	yanger -f swagger -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv.yang
+	yanger -f swagger -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-descriptors.yang
 
-etsi-nfv-tree.txt: packages/sol6/src/yang/*.yang
-	pyang -f tree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv.yang
+etsi-nfv-pkg-tree.txt: packages/sol6/src/yang/*.yang
+	pyang -f tree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-pkg.yang
 
-etsi-nfv-tree.html: packages/sol6/src/yang/*.yang
-	pyang -f jstree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv.yang
+etsi-nfv-pkg-tree.html: packages/sol6/src/yang/*.yang
+	pyang -f jstree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-pkg.yang
+
+etsi-nfv-descriptors-tree.txt: packages/sol6/src/yang/*.yang
+	pyang -f tree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-descriptors.yang
+
+etsi-nfv-descriptors-tree.html: packages/sol6/src/yang/*.yang
+	pyang -f jstree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-descriptors.yang
