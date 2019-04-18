@@ -1,15 +1,15 @@
-module etsi-nfv-common {
+submodule etsi-nfv-common {
   yang-version 1.1;
-  namespace "urn:etsi:nfv:yang:etsi-nfv-common";
-  prefix cmn;
-
+  belongs-to etsi-nfv-descriptors {
+    prefix nfv;
+  }
   organization
     "European Telecommunications Standards Institute (ETSI)";
 
   description
     "Common data types for ETSI data models.";
 
-  revision 2019-03-18 {
+  revision 2019-04-25 {
     description
       "Initial revision
 
@@ -319,14 +319,10 @@ module etsi-nfv-common {
 
   grouping connectivity-type {
     container connectivity-type {
-      list layer-protocol {
-	key "protocol";
-
-	leaf protocol {
-          type identityref {
-            base layer-protocol;
-          }
-	}
+      leaf-list layer-protocol {
+        type identityref {
+          base layer-protocol;
+        }
         description
           "Identifies the protocols that the VL uses (Ethernet,
            MPLS, ODU2, IPV4, IPV6, Pseudo-Wire). The top layer

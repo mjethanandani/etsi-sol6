@@ -1,13 +1,13 @@
 {
   "data": {
-    "etsi-nfv:nfv": {
+    "etsi-nfv-descriptors:nfv": {
       "vnfd": [
         {
           "id": "ASA",
           "provider": "My Company",
           "product-name": "My Company ASAv",
           "software-version": "9.8",
-          "version": "9.8 ",
+          "version": "9.8",
           "vnfm-info": ["My Company Vnfm"],
           "vdu": [
             {
@@ -16,15 +16,15 @@
               "int-cpd": [
                 {
                   "id": "inside",
-                  "layer-protocol": "etsi-nfv:Ethernet"
+                  "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
                 },
                 {
                   "id": "management",
-                  "layer-protocol": "etsi-nfv:Ethernet"
+                  "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
                 },
                 {
                   "id": "outside",
-                  "layer-protocol": "etsi-nfv:Ethernet"
+                  "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
                 }
               ],
               "virtual-compute-desc": "asa-vcd",
@@ -43,50 +43,53 @@
               }
             }
           ],
-          "virtual-storage-desc": [
+          "virtual-storage-descriptor": [
             {
               "id": "asa-vsd",
-              "type-of-storage": "root",
+              "type-of-storage": "etsi-nfv-descriptors:root-storage",
               "size-of-storage": "0"
             }
           ],
           "sw-image-desc": [
             {
               "id": "asa-image",
-              "name": "asa1.0",
-              "version": "1.0",
-              "checksum": "123321",
+              "name": "ASA image",
+              "version": "1.1",
+              "checksum": {
+                "algorithm": "etsi-nfv-descriptors:sha-224",
+                "hash": "deadbeef"
+              },
               "container-format": "bare",
               "disk-format": "qcow2",
               "min-ram": "2.0",
-              "size": "2",
+              "size": "1",
               "image": "http://www.cisco.com/asa.qcow2"
             }
           ],
           "ext-cpd": [
             {
               "id": "inside",
-              "vdu": {
+              "int-cpd": {
                 "vdu-id": "firewall",
-                "int-cpd-id": "inside"
+                "cpd": "inside"
               },
-              "layer-protocol": "etsi-nfv:Ethernet"
+              "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
             },
             {
               "id": "management",
-              "vdu": {
+              "int-cpd": {
                 "vdu-id": "firewall",
-                "int-cpd-id": "management"
+                "cpd": "management"
               },
-              "layer-protocol": "etsi-nfv:Ethernet"
+              "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
             },
             {
               "id": "outside",
-              "vdu": {
+              "int-cpd": {
                 "vdu-id": "firewall",
-                "int-cpd-id": "outside"
+                "cpd": "outside"
               },
-              "layer-protocol": "etsi-nfv:Ethernet"
+              "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
             }
           ],
           "df": [
@@ -104,7 +107,7 @@
                   "id": "double",
                   "vdu-level": [
                     {
-                      "id": "firewall",
+                      "vdu-id": "firewall",
                       "number-of-instances": 2
                     }
                   ]
@@ -113,7 +116,7 @@
                   "id": "single",
                   "vdu-level": [
                     {
-                      "id": "firewall",
+                      "vdu-id": "firewall",
                       "number-of-instances": 1
                     }
                   ]
@@ -137,15 +140,15 @@
               "int-cpd": [
                 {
                   "id": "left",
-                  "layer-protocol": "etsi-nfv:Ethernet"
+                  "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
                 },
                 {
                   "id": "management",
-                  "layer-protocol": "etsi-nfv:Ethernet"
+                  "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
                 },
                 {
                   "id": "right",
-                  "layer-protocol": "etsi-nfv:Ethernet"
+                  "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
                 }
               ],
               "virtual-compute-desc": "csr-vcd",
@@ -164,50 +167,53 @@
               }
             }
           ],
-          "virtual-storage-desc": [
+          "virtual-storage-descriptor": [
             {
               "id": "csr-vsd",
-              "type-of-storage": "root",
+              "type-of-storage": "etsi-nfv-descriptors:root-storage",
               "size-of-storage": "0"
             }
           ],
           "sw-image-desc": [
             {
               "id": "csr-image",
-              "name": "csr2.1",
-              "version": "2.1",
-              "checksum": "123321",
+              "name": "CSR image",
+              "version": "1.1",
+              "checksum": {
+                "algorithm": "etsi-nfv-descriptors:sha-224",
+                "hash": "deadbeef"
+              },
               "container-format": "bare",
               "disk-format": "qcow2",
               "min-ram": "2.0",
-              "size": "2",
+              "size": "1",
               "image": "http://www.cisco.com/csr.qcow2"
             }
           ],
           "ext-cpd": [
             {
               "id": "left",
-              "vdu": {
+              "int-cpd": {
                 "vdu-id": "router",
-                "int-cpd-id": "left"
+                "cpd": "left"
               },
-              "layer-protocol": "etsi-nfv:Ethernet"
+              "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
             },
             {
               "id": "management",
-              "vdu": {
+              "int-cpd": {
                 "vdu-id": "router",
-                "int-cpd-id": "management"
+                "cpd": "management"
               },
-              "layer-protocol": "etsi-nfv:Ethernet"
+              "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
             },
             {
               "id": "right",
-              "vdu": {
+              "int-cpd": {
                 "vdu-id": "router",
-                "int-cpd-id": "right"
+                "cpd": "right"
               },
-              "layer-protocol": "etsi-nfv:Ethernet"
+              "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
             }
           ],
           "df": [
@@ -225,7 +231,7 @@
                   "id": "double",
                   "vdu-level": [
                     {
-                      "id": "router",
+                      "vdu-id": "router",
                       "number-of-instances": 2
                     }
                   ]
@@ -234,7 +240,7 @@
                   "id": "single",
                   "vdu-level": [
                     {
-                      "id": "router",
+                      "vdu-id": "router",
                       "number-of-instances": 1
                     }
                   ]
@@ -267,7 +273,7 @@
                 {
                   "id": "firewall",
                   "vnfd-id": "ASA",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "instantiation-level": "single",
                   "min-number-of-instances": 1,
                   "max-number-of-instances": 1
@@ -310,9 +316,12 @@
           "virtual-link-desc": [
             {
               "id": "fw2dpi",
-              "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "etsi-nfv:Ethernet"
+                "layer-protocol": [
+                  {
+                    "protocol": "etsi-nfv-descriptors:ethernet"
+                  }
+                ]
               },
               "df": [
                 {
@@ -326,9 +335,12 @@
             },
             {
               "id": "mgmt",
-              "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "etsi-nfv:IPv4"
+                "layer-protocol": [
+                  {
+                    "protocol": "etsi-nfv-descriptors:ipv4"
+                  }
+                ]
               },
               "df": [
                 {
@@ -342,9 +354,12 @@
             },
             {
               "id": "r2fw",
-              "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "etsi-nfv:Ethernet"
+                "layer-protocol": [
+                  {
+                    "protocol": "etsi-nfv-descriptors:ethernet"
+                  }
+                ]
               },
               "df": [
                 {
@@ -364,36 +379,56 @@
                 {
                   "id": "firewall",
                   "vnfd-id": "ASA",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "instantiation-level": "single",
                   "min-number-of-instances": 1,
                   "max-number-of-instances": 1,
                   "virtual-link-connectivity": [
                     {
                       "virtual-link-profile-id": "mgmt",
-                      "cpd-id": ["management"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "firewall",
+                          "constituent-cpd-id": "management"
+                        }
+                      ]
                     },
                     {
                       "virtual-link-profile-id": "r2fw",
-                      "cpd-id": ["outside"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "firewall",
+                          "constituent-cpd-id": "outside"
+                        }
+                      ]
                     }
                   ]
                 },
                 {
                   "id": "router",
                   "vnfd-id": "CSR",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "instantiation-level": "single",
                   "min-number-of-instances": 1,
                   "max-number-of-instances": 1,
                   "virtual-link-connectivity": [
                     {
                       "virtual-link-profile-id": "mgmt",
-                      "cpd-id": ["management"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "router",
+                          "constituent-cpd-id": "management"
+                        }
+                      ]
                     },
                     {
                       "virtual-link-profile-id": "r2fw",
-                      "cpd-id": ["right"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "router",
+                          "constituent-cpd-id": "right"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -402,7 +437,7 @@
                 {
                   "id": "mgmt",
                   "virtual-link-desc-id": "mgmt",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "max-bitrate-requirements": {
                     "root": "1000"
                   },
@@ -413,7 +448,7 @@
                 {
                   "id": "r2fw",
                   "virtual-link-desc-id": "r2fw",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "max-bitrate-requirements": {
                     "root": "10000000"
                   },
@@ -445,40 +480,65 @@
                 {
                   "id": "firewall",
                   "vnfd-id": "ASA",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "instantiation-level": "single",
                   "min-number-of-instances": 1,
                   "max-number-of-instances": 1,
                   "virtual-link-connectivity": [
                     {
                       "virtual-link-profile-id": "fw2dpi",
-                      "cpd-id": ["inside"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "firewall",
+                          "constituent-cpd-id": "inside"
+                        }
+                      ]
                     },
                     {
                       "virtual-link-profile-id": "mgmt",
-                      "cpd-id": ["management"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "firewall",
+                          "constituent-cpd-id": "management"
+                        }
+                      ]
                     },
                     {
                       "virtual-link-profile-id": "r2fw",
-                      "cpd-id": ["outside"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "firewall",
+                          "constituent-cpd-id": "outside"
+                        }
+                      ]
                     }
                   ]
                 },
                 {
                   "id": "router",
                   "vnfd-id": "CSR",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "instantiation-level": "single",
                   "min-number-of-instances": 1,
                   "max-number-of-instances": 1,
                   "virtual-link-connectivity": [
                     {
                       "virtual-link-profile-id": "mgmt",
-                      "cpd-id": ["management"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "router",
+                          "constituent-cpd-id": "management"
+                        }
+                      ]
                     },
                     {
                       "virtual-link-profile-id": "r2fw",
-                      "cpd-id": ["right"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "router",
+                          "constituent-cpd-id": "right"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -490,7 +550,12 @@
                   "virtual-link-connectivity": [
                     {
                       "virtual-link-profile-id": "fw2dpi",
-                      "cpd-id": ["outside"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "physical-dpi",
+                          "constituent-cpd-id": "outside"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -499,7 +564,7 @@
                 {
                   "id": "fw2dpi",
                   "virtual-link-desc-id": "fw2dpi",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "max-bitrate-requirements": {
                     "root": "1000000"
                   },
@@ -510,7 +575,7 @@
                 {
                   "id": "mgmt",
                   "virtual-link-desc-id": "mgmt",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "max-bitrate-requirements": {
                     "root": "1000"
                   },
@@ -521,7 +586,7 @@
                 {
                   "id": "r2fw",
                   "virtual-link-desc-id": "r2fw",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "max-bitrate-requirements": {
                     "root": "1000000"
                   },
@@ -572,9 +637,12 @@
           "virtual-link-desc": [
             {
               "id": "r2fw",
-              "version": "1.0",
               "connectivity-type": {
-                "layer-protocol": "etsi-nfv:IPv4"
+                "layer-protocol": [
+                  {
+                    "protocol": "etsi-nfv-descriptors:ipv4"
+                  }
+                ]
               },
               "df": [
                 {
@@ -594,14 +662,19 @@
                 {
                   "id": "router",
                   "vnfd-id": "CSR",
-                  "flavor-id": "normal",
+                  "flavour-id": "normal",
                   "instantiation-level": "single",
                   "min-number-of-instances": 1,
                   "max-number-of-instances": 1,
                   "virtual-link-connectivity": [
                     {
                       "virtual-link-profile-id": "r2fw",
-                      "cpd-id": ["right"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "router",
+                          "constituent-cpd-id": "right"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -610,7 +683,7 @@
                 {
                   "id": "r2fw",
                   "virtual-link-desc-id": "r2fw",
-                  "flavor-id": "r2fw",
+                  "flavour-id": "r2fw",
                   "max-bitrate-requirements": {
                     "root": "500"
                   },
@@ -647,7 +720,12 @@
                   "virtual-link-connectivity": [
                     {
                       "virtual-link-profile-id": "r2fw",
-                      "cpd-id": ["outside"]
+                      "constituent-cpd-id": [
+                        {
+                          "constituent-base-element-id": "firewall",
+                          "constituent-cpd-id": "outside"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -663,7 +741,7 @@
           "ext-cpd": [
             {
               "id": "outside",
-              "layer-protocol": "etsi-nfv:Ethernet"
+              "layer-protocol": ["etsi-nfv-descriptors:ethernet"]
             }
           ]
         }
