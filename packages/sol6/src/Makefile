@@ -6,9 +6,13 @@ include $(NCS_DIR)/src/ncs/build/include.ncs.mk
 
 SRC  = $(wildcard yang/*.yang)
 DIRS = ../load-dir
-FXS = $(DIRS)/etsi-nfv.fxs
 
-$(DIRS)/etsi-nfv.fxs: yang/etsi-nfv-common.yang yang/etsi-nfv-vnf.yang  yang/etsi-nfv-pnf.yang yang/etsi-nfv-ns.yang
+FXS = $(DIRS)/etsi-nfv-descriptors.fxs $(DIRS)/etsi-nfv-vnfd.fxs $(DIRS)/etsi-nfv-nsd.fxs $(DIRS)/etsi-nfv-pnfd.fxs
+
+$(DIRS)/etsi-nfv-vnfd.fxs: yang/etsi-nfv-descriptors.yang
+$(DIRS)/etsi-nfv-nsd.fxs: yang/etsi-nfv-descriptors.yang
+$(DIRS)/etsi-nfv-pnfd.fxs: yang/etsi-nfv-descriptors.yang
+$(DIRS)/etsi-nfv-descriptors.fxs: yang/etsi-nfv-common.yang yang/etsi-nfv-vnf.yang yang/etsi-nfv-pnf.yang yang/etsi-nfv-ns.yang
 
 YANGPATH += yang
 
@@ -22,7 +26,7 @@ $(DIRS):
 	mkdir -p $@
 
 ../load-dir/%.fxs: yang/%.yang
-	# $(NCSC) $(NCSCPATH) -c --fail-on-warnings --strict-yang `ls yang/$*-ann.yang  > /dev/null 2>&1 && echo "-a yang/$*-ann.yang"` -o $@ $<
+# 	$(NCSC) $(NCSCPATH) -c --fail-on-warnings --strict-yang `ls yang/$*-ann.yang  > /dev/null 2>&1 && echo "-a yang/$*-ann.yang"` -o $@ $<
 	$(NCSC) $(NCSCPATH) -c -o $@ $<
 clean:
 	rm -rf $(DIRS)
