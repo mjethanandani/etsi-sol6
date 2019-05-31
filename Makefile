@@ -6,7 +6,7 @@ include ./setup.mk
 
 .PHONY: all start stop clean db-clean
 
-all: packages netsim etsi-nfv-tree.txt etsi-nfv-tree.html etsi-nfv-swagger.json
+all: packages netsim etsi-nfv-descriptors-tree.txt etsi-nfv-descriptors-tree.html etsi-nfv-descriptors-swagger.json
 	if [ ! -d ncs-cdb ]; then mkdir ncs-cdb; fi
 	if [ ! -d init_data ]; then mkdir init_data; fi
 	cp init_data/* ncs-cdb/. > /dev/null 2>&1 || true
@@ -66,11 +66,11 @@ container-test:
 	docker build -t etsi-test .
 	docker run --rm -it etsi-test
 
-etsi-nfv-swagger.json: packages/sol6/src/yang/*.yang
-	yanger -f swagger -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv.yang
+etsi-nfv-descriptors-swagger.json: packages/sol6/src/yang/*.yang
+	yanger -f swagger -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-descriptors.yang
 
-etsi-nfv-tree.txt: packages/sol6/src/yang/*.yang
-	pyang -f tree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv.yang
+etsi-nfv-descriptors-tree.txt: packages/sol6/src/yang/*.yang
+	pyang -f tree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-descriptors.yang
 
-etsi-nfv-tree.html: packages/sol6/src/yang/*.yang
-	pyang -f jstree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv.yang
+etsi-nfv-descriptors-tree.html: packages/sol6/src/yang/*.yang
+	pyang -f jstree -o $@ -p packages/sol6/src/yang packages/sol6/src/yang/etsi-nfv-descriptors.yang
