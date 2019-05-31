@@ -1,8 +1,7 @@
-<config xmlns="http://tail-f.com/ns/config/1.0">
-  <nfv xmlns="urn:etsi:params:xml:ns:yang:etsi-nfv">
+<nfv xmlns="urn:etsi:nfv:yang:etsi-nfv-descriptors">
   <vnfd>
     <id>complex-vnf</id>
-    <provider>ACME</provider>
+    <provider>My Company</provider>
     <product-name>complex-vnf</product-name>
     <software-version>1.0</software-version>
     <version>1.0</version>
@@ -13,12 +12,12 @@
       <int-cpd>
         <id>internal</id>
         <int-virtual-link-desc>internal-vl</int-virtual-link-desc>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>ipv4</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>mgmt</id>
         <int-virtual-link-desc>mgmt</int-virtual-link-desc>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>ipv4</layer-protocol>
       </int-cpd>
       <virtual-compute-desc>CP</virtual-compute-desc>
       <virtual-storage-desc>root</virtual-storage-desc>
@@ -30,12 +29,12 @@
       <int-cpd>
         <id>internal</id>
         <int-virtual-link-desc>internal-vl</int-virtual-link-desc>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>ipv4</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>mgmt</id>
         <int-virtual-link-desc>mgmt</int-virtual-link-desc>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>ipv4</layer-protocol>
       </int-cpd>
       <virtual-compute-desc>CP</virtual-compute-desc>
       <virtual-storage-desc>root</virtual-storage-desc>
@@ -46,16 +45,16 @@
       <name>data-plane</name>
       <int-cpd>
         <id>in</id>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>ipv4</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>internal</id>
         <int-virtual-link-desc>internal-vl</int-virtual-link-desc>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>ipv4</layer-protocol>
       </int-cpd>
       <int-cpd>
         <id>out</id>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>ipv4</layer-protocol>
       </int-cpd>
       <virtual-compute-desc>DP</virtual-compute-desc>
       <virtual-storage-desc>root</virtual-storage-desc>
@@ -79,63 +78,77 @@
         <num-virtual-cpu>16</num-virtual-cpu>
       </virtual-cpu>
     </virtual-compute-desc>
-    <virtual-storage-desc>
+    <virtual-storage-descriptor>
       <id>root</id>
-      <type-of-storage>root</type-of-storage>
+      <type-of-storage>root-storage</type-of-storage>
       <size-of-storage>10</size-of-storage>
-    </virtual-storage-desc>
+    </virtual-storage-descriptor>
     <sw-image-desc>
       <id>CP</id>
       <name>CP</name>
-      <version>1.0</version>
-      <checksum>123231</checksum>
+      <version>1.1</version>
+      <checksum>
+	<algorithm>sha-224</algorithm>
+	<hash>deadbeef</hash>
+      </checksum>
       <container-format>bare</container-format>
       <disk-format>qcow2</disk-format>
+      <min-disk>1</min-disk>
+      <min-ram>2.0</min-ram>
       <size>1</size>
-      <image>http://acme.images.com/control-plane.qcow2</image>
+      <image>http://mycompany.images.com/control-plane.qcow2</image>
     </sw-image-desc>
     <sw-image-desc>
       <id>DP</id>
       <name>DP</name>
-      <version>1.0</version>
-      <checksum>123231</checksum>
+      <version>1.1</version>
+      <checksum>
+	<algorithm>sha-224</algorithm>
+	<hash>deadbeef</hash>
+      </checksum>
       <container-format>bare</container-format>
       <disk-format>qcow2</disk-format>
+      <min-disk>1</min-disk>
+      <min-ram>2.0</min-ram>
       <size>1</size>
-      <image>http://acme.images.com/data-plane.qcow2</image>
+      <image>http://mycompany.images.com/data-plane.qcow2</image>
     </sw-image-desc>
     <int-virtual-link-desc>
       <id>internal-vl</id>
       <connectivity-type>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>
+          <protocol>ipv4</protocol>
+        </layer-protocol>
       </connectivity-type>
     </int-virtual-link-desc>
     <int-virtual-link-desc>
       <id>mgmt</id>
       <connectivity-type>
-        <layer-protocol>IPv4</layer-protocol>
+        <layer-protocol>
+          <protocol>ipv4</protocol>
+        </layer-protocol>
       </connectivity-type>
     </int-virtual-link-desc>
     <ext-cpd>
       <id>in</id>
-      <vdu>
+      <int-cpd>
         <vdu-id>data-plane</vdu-id>
-        <int-cpd-id>in</int-cpd-id>
-      </vdu>
-      <layer-protocol>IPv4</layer-protocol>
+        <cpd>in</cpd>
+      </int-cpd>
+      <layer-protocol>ipv4</layer-protocol>
     </ext-cpd>
     <ext-cpd>
       <id>mgmt</id>
       <int-virtual-link-desc>mgmt</int-virtual-link-desc>
-      <layer-protocol>IPv4</layer-protocol>
+      <layer-protocol>ipv4</layer-protocol>
     </ext-cpd>
     <ext-cpd>
       <id>out</id>
-      <vdu>
+      <int-cpd>
         <vdu-id>data-plane</vdu-id>
-        <int-cpd-id>out</int-cpd-id>
-      </vdu>
-      <layer-protocol>IPv4</layer-protocol>
+        <cpd>out</cpd>
+      </int-cpd>
+      <layer-protocol>ipv4</layer-protocol>
     </ext-cpd>
     <df>
       <id>gold</id>
@@ -163,34 +176,45 @@
       <instantiation-level>
         <id>il-1</id>
         <vdu-level>
-          <id>control-plane-active</id>
+          <vdu-id>control-plane-active</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>control-plane-standby</id>
+          <vdu-id>control-plane-standby</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>data-plane</id>
+          <vdu-id>data-plane</vdu-id>
           <number-of-instances>2</number-of-instances>
         </vdu-level>
       </instantiation-level>
       <instantiation-level>
         <id>il-2</id>
         <vdu-level>
-          <id>control-plane-active</id>
+          <vdu-id>control-plane-active</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>control-plane-standby</id>
+          <vdu-id>control-plane-standby</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>data-plane</id>
+          <vdu-id>data-plane</vdu-id>
           <number-of-instances>4</number-of-instances>
         </vdu-level>
       </instantiation-level>
       <default-instantiation-level>il-1</default-instantiation-level>
+      <lcm-operations-configuration>
+	<scale-vnf-to-level-op-config>
+	  <arbitrary-target-levels-supported>true</arbitrary-target-levels-supported>
+	</scale-vnf-to-level-op-config>
+	<terminate-vnf-op-config>
+	  <min-graceful-termination>1</min-graceful-termination>
+	</terminate-vnf-op-config>
+	<operate-vnf-op-config>
+	  <min-graceful-stop-timeout>1</min-graceful-stop-timeout>
+	</operate-vnf-op-config>
+      </lcm-operations-configuration>
       <affinity-or-anti-affinity-group>
         <id>control-plane</id>
         <type>anti-affinity</type>
@@ -223,34 +247,45 @@
       <instantiation-level>
         <id>il-1</id>
         <vdu-level>
-          <id>control-plane-active</id>
+          <vdu-id>control-plane-active</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>control-plane-standby</id>
+          <vdu-id>control-plane-standby</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>data-plane</id>
+          <vdu-id>data-plane</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
       </instantiation-level>
       <instantiation-level>
         <id>il-2</id>
         <vdu-level>
-          <id>control-plane-active</id>
+          <vdu-id>control-plane-active</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>control-plane-standby</id>
+          <vdu-id>control-plane-standby</vdu-id>
           <number-of-instances>1</number-of-instances>
         </vdu-level>
         <vdu-level>
-          <id>data-plane</id>
+          <vdu-id>data-plane</vdu-id>
           <number-of-instances>2</number-of-instances>
         </vdu-level>
       </instantiation-level>
       <default-instantiation-level>il-1</default-instantiation-level>
+      <lcm-operations-configuration>
+	<scale-vnf-to-level-op-config>
+	  <arbitrary-target-levels-supported>true</arbitrary-target-levels-supported>
+	</scale-vnf-to-level-op-config>
+	<terminate-vnf-op-config>
+	  <min-graceful-termination>1</min-graceful-termination>
+	</terminate-vnf-op-config>
+	<operate-vnf-op-config>
+	  <min-graceful-stop-timeout>1</min-graceful-stop-timeout>
+	</operate-vnf-op-config>
+      </lcm-operations-configuration>
       <affinity-or-anti-affinity-group>
         <id>control-plane</id>
         <type>anti-affinity</type>
@@ -258,5 +293,4 @@
       </affinity-or-anti-affinity-group>
     </df>
   </vnfd>
-  </nfv>
-</config>
+</nfv>
